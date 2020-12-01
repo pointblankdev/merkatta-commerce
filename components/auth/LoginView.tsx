@@ -3,6 +3,7 @@ import { Logo, Button, Input } from '@components/ui'
 import useLogin from '@bigcommerce/storefront-data-hooks/use-login'
 import { useUI } from '@components/ui/context'
 import { validate } from 'email-validator'
+import dynamic from 'next/dynamic'
 
 interface Props {}
 
