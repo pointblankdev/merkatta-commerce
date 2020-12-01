@@ -43,6 +43,12 @@ const Navbar: FC = () => {
               <Link href="/search?q=accessories">
                 <a className={s.link}>Accessories</a>
               </Link>
+              <Link href="https://bigcommerce.webkul.com/en/bigcommerce/app/marketplace/mvk5ue8r3o/mp-seller/secure/login">
+                <a className={s.link}>Seller Login</a>
+              </Link>
+              <Link href="https://bigcommerce.webkul.com/en/bigcommerce/app/marketplace/mvk5ue8r3o/mp-seller/secure/register">
+                <a className={s.link}>Seller Registration</a>
+              </Link>
             </nav>
           </div>
 
