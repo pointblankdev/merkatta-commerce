@@ -68,7 +68,6 @@ export default function Register() {
 
         <span className="pt-1 text-center text-sm">
           <span className="text-accents-7">Do you have an account?</span>
-          {` `}
           <a
             className="text-accent-9 font-bold hover:underline cursor-pointer"
           >
