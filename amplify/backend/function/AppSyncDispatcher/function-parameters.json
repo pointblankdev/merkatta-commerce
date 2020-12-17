@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "api": {
+      "MerkattaAPI": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

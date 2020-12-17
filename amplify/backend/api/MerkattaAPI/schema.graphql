@@ -1,0 +1,4 @@
+type Vendor @model {
+  id: ID!
+  name: String!
+}
