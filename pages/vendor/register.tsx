@@ -1,10 +1,9 @@
-import { FC, useEffect, useState, useCallback } from 'react'
+import { useState } from 'react'
 import type { GetStaticPropsContext } from 'next'
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
 import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import { Layout } from '@components/common'
-import { Info } from '@components/icons'
-import { Text, Container, Logo, Button, Input } from '@components/ui'
+import { Container, Logo, Button, Input } from '@components/ui'
 import { defatultPageProps } from '@lib/defaults'
 
 export async function getStaticProps({
@@ -29,22 +28,17 @@ export default function Register() {
   const [country, setCountry] = useState('')
   const [zipcode, setZipcode] = useState('')
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
-  const [dirty, setDirty] = useState(false)
   const [disabled, setDisabled] = useState(false)
 
   return (
     <Container>
       <div className="grid justify-items-stretch">
-        <div className="justify-self-center">
+        <div className="justify-self-center w-full md:w-3/5">
           <form>
             <div className="flex justify-center pb-12 ">
               <Logo width="64px" height="64px" />
             </div>
-            <div className="flex flex-col space-y-4">
-              {message && (
-                <div className="text-red border border-red p-3">{message}</div>
-              )}
+            <div className="flex flex-col space-y-4 w-full">
               <Input placeholder="Seller" onChange={setSeller} />
               <Input type="email" placeholder="Email" onChange={setEmail} />
               <Input placeholder="Phone" onChange={setPhone} />
@@ -67,8 +61,8 @@ export default function Register() {
               </div>
 
               <span className="pt-1 text-center text-sm">
-                <span className="text-accents-7">Do you have an account?</span>
-                <a className="text-accent-9 font-bold hover:underline cursor-pointer">
+                <span className="text-accents-7">Do you have an account? </span>
+                <a className="text-accent-9 font-bold hover:underline cursor-pointer" href="/vendor/signin">
                   Log In
                 </a>
               </span>
