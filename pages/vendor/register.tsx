@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { GetStaticPropsContext } from 'next'
+import { useRouter } from 'next/router'
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
 import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import { Layout } from '@components/common'
@@ -29,12 +30,18 @@ export default function Register() {
   const [zipcode, setZipcode] = useState('')
   const [loading, setLoading] = useState(false)
   const [disabled, setDisabled] = useState(false)
+  const router = useRouter()
+
+  const click = (e) => {
+    e.preventDefault()
+    router.push("/vendor/dashboard")
+  }
 
   return (
     <Container>
       <div className="grid justify-items-stretch">
         <div className="justify-self-center w-full md:w-3/5">
-          <form>
+          <form onSubmit={click}>
             <div className="flex justify-center pb-12 ">
               <Logo width="64px" height="64px" />
             </div>
