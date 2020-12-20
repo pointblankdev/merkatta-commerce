@@ -74,7 +74,7 @@ const Layout: FC<Props> = ({ children, pageProps }) => {
 
         <FeatureBar
           title="This site uses cookies to improve your experience. By clicking, you agree to our Privacy Policy."
-          hide={acceptedCookies}
+          hide
           action={
             <Button className="mx-5" onClick={onAcceptCookies}>
               Accept cookies
