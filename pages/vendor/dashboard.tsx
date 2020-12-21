@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import { useState } from "react"
 import { Layout } from '@components/common'
-import { Container, Product, Settings } from '@components/ui'
+import { Container, Products, Settings } from '@components/ui'
 export default function Dashboard() {
   const categories = [{index: 0, label: 'Product'}, {index: 1, label: 'Settings'}]
   const [activeCategory, setActiveCategory] = useState(0)
@@ -21,7 +21,7 @@ export default function Dashboard() {
           </ul>
       </div>
       <div className="col-span-10">
-        {activeCategory === 0 ? <Product /> : <Settings />}
+        {activeCategory === 0 ? <Products /> : <Settings />}
       </div>
     </div>
   </Container>
