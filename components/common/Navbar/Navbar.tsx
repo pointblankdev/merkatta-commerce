@@ -33,7 +33,7 @@ const Navbar: FC = () => {
                 <Logo />
               </a>
             </Link>
-            <nav className="space-x-4 ml-6 hidden lg:block">
+            <nav className="space-x-4 ml-6 hidden">
               <Link href="/search">
                 <a className={s.link}>All</a>
               </Link>
@@ -52,16 +52,16 @@ const Navbar: FC = () => {
             </nav>
           </div>
 
-          <div className="flex-1 justify-center hidden lg:flex">
+          <div className="flex-1 justify-center hidden">
             <Searchbar />
           </div>
 
-          <div className="flex flex-1 justify-end space-x-8">
+          <div className="flex flex-1 justify-end space-x-8 hidden">
             <UserNav />
           </div>
         </div>
 
-        <div className="flex pb-4 lg:px-6 lg:hidden">
+        <div className="flex pb-4 lg:px-6 hidden">
           <Searchbar id="mobile-search" />
         </div>
       </Container>
