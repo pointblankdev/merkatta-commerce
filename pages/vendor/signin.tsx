@@ -14,7 +14,7 @@ export default function Signin() {
 
   return (
     <Container>
-      <div className="grid justify-items-stretch">
+      <div className="grid justify-center h-screen content-center">
         <div className="justify-self-center">
           <form onSubmit={click}>
             <div className="flex justify-center pb-12">
