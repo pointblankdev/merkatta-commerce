@@ -55,4 +55,7 @@ module.exports = {
     },
   },
   plugins: [require('@tailwindcss/ui')],
+  variants: {
+    opacity: ({ after }) => after(['disabled'])
+  },
 }
