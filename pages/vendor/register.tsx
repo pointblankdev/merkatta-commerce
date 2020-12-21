@@ -39,7 +39,7 @@ export default function Register() {
 
   return (
     <Container>
-      <div className="grid justify-items-stretch">
+      <div className="grid justify-items-stretch h-screen content-center">
         <div className="justify-self-center w-full md:w-3/5">
           <form onSubmit={click}>
             <div className="flex justify-center pb-12 ">
