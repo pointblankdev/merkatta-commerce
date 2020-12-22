@@ -1,13 +1,16 @@
 import { FC, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import cn from 'classnames'
+import throttle from 'lodash.throttle'
 import s from './Navbar.module.css'
 import { Logo, Container } from '@components/ui'
 import { Searchbar, UserNav } from '@components/common'
-import cn from 'classnames'
-import throttle from 'lodash.throttle'
+
 
 const Navbar: FC = () => {
   const [hasScrolled, setHasScrolled] = useState(false)
+  const router = useRouter()
 
   const handleScroll = () => {
     const offset = 0
@@ -51,16 +54,17 @@ const Navbar: FC = () => {
               </Link>
             </nav>
           </div>
-
-          <div className="flex-1 justify-center hidden">
-            <Searchbar />
-          </div>
-
-          <div className="flex flex-1 justify-end space-x-8 hidden">
-            <UserNav />
-          </div>
+          {router.pathname !== '/vendor/signin' && router.pathname !== '/vendor/register' && (
+            <>
+              <div className="flex-1 justify-center">
+                <Searchbar />  
+              </div>
+              <div className="flex flex-1 justify-end space-x-8">
+                <UserNav />
+              </div>
+            </>
+          )}
         </div>
-
         <div className="flex pb-4 lg:px-6 hidden">
           <Searchbar id="mobile-search" />
         </div>

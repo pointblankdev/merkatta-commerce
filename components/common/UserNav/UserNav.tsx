@@ -28,13 +28,13 @@ const UserNav: FC<Props> = ({ className, children, ...props }) => {
       <div className={s.mainContainer}>
         <ul className={s.list}>
           <li className={s.item} onClick={toggleSidebar}>
-            <Bag />
+            <Bag className="hidden"/>
             {itemsCount > 0 && <span className={s.bagCount}>{itemsCount}</span>}
           </li>
           <li className={s.item}>
             <Link href="/wishlist">
               <a onClick={closeSidebarIfPresent} aria-label="Wishlist">
-                <Heart />
+                <Heart className="hidden" />
               </a>
             </Link>
           </li>
