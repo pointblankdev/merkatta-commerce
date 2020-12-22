@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Layout } from '@components/common'
-import { Button, Container, Input, Logo } from '@components/ui'
+import { Button, Container, Input } from '@components/ui'
+import LogoFull from '@components/ui/LogoFull'
 export default function Signin() {
   const router = useRouter()
   const [username, setUsername] = useState('')
@@ -18,7 +19,7 @@ export default function Signin() {
         <div className="justify-self-center">
           <form onSubmit={click}>
             <div className="flex justify-center pb-12">
-              <Logo width="64px" height="64px" />
+              <LogoFull />
             </div>
             <div className="flex flex-col space-y-4 w-full">
               <Input placeholder="username" onChange={setUsername} />
