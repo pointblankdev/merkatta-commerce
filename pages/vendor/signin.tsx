@@ -5,7 +5,7 @@ import { Button, Container, Input } from '@components/ui'
 import LogoFull from '@components/ui/LogoFull'
 export default function Signin() {
   const router = useRouter()
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const click = (e) => {
@@ -22,7 +22,7 @@ export default function Signin() {
               <LogoFull />
             </div>
             <div className="flex flex-col space-y-4 w-full">
-              <Input placeholder="email" onChange={setUsername} />
+              <Input placeholder="email" onChange={setEmail} />
               <Input type="password" placeholder="password" onChange={setPassword} />
               <Button type="submit" variant="slim">Sign In</Button>
               <span className="pt-1 text-center text-sm">
