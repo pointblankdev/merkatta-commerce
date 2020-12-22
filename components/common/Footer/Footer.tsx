@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { Page } from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import getSlug from '@lib/get-slug'
-import { Logo, Container } from '@components/ui'
+import { Container } from '@components/ui'
+import LogoFull from '@components/ui/LogoFull'
 
 interface Props {
   className?: string
@@ -25,7 +26,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
           <div className="col-span-1 lg:col-span-2">
             <Link href="/">
               <a className="flex flex-initial items-center font-bold md:mr-24">
-                  <Logo />
+                  <LogoFull />
               </a>
             </Link>
           </div>
