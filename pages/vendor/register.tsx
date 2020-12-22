@@ -22,13 +22,6 @@ export async function getStaticProps({
 export default function Register() {
   const [seller, setSeller] = useState('')
   const [email, setEmail] = useState('')
-  // const [phone, setPhone] = useState('')
-  // const [address, setAddress] = useState('')
-  // const [address2, setAddress2] = useState('')
-  // const [city, setCity] = useState('')
-  // const [state, setState] = useState('')
-  // const [country, setCountry] = useState('')
-  // const [zipcode, setZipcode] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -51,13 +44,6 @@ export default function Register() {
             <div className="flex flex-col space-y-4 w-full">
               <Input placeholder="Company Name" onChange={setSeller} />
               <Input type="email" placeholder="Email" onChange={setEmail} />
-              {/* <Input placeholder="Phone" onChange={setPhone} />
-              <Input placeholder="Address" onChange={setAddress} />
-              <Input placeholder="Address 2" onChange={setAddress2} />
-              <Input placeholder="City" onChange={setCity} />
-              <Input placeholder="State" onChange={setState} />
-              <Input placeholder="Country" onChange={setCountry} />
-              <Input placeholder="Zipcode" onChange={setZipcode} /> */}
               <Input type="password" placeholder="Password" onChange={setPassword} />
               <Input type="password" placeholder="Confirm Password" onChange={setConfirmPassword} />
 
