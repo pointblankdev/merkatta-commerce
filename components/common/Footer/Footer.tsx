@@ -25,12 +25,12 @@ const Footer: FC<Props> = ({ className, pages }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-accents-2 py-12 text-primary bg-primary transition-colors duration-150">
           <div className="col-span-1 lg:col-span-2">
             <Link href="/">
-              <a className="flex flex-initial items-center font-bold md:mr-24">
+              <a className="invisible flex flex-initial items-center font-bold md:mr-24 md:visible">
                   <LogoFull />
               </a>
             </Link>
           </div>
-          <div className="col-span-1 lg:col-span-2">
+          <div className="justify-self-center col-span-1 lg:col-span-2 lg:col-start-6">
             <ul className="flex flex-initial flex-row md:flex-1">
               <li className="px-3">
                 <Link href="/">
