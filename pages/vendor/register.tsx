@@ -4,8 +4,9 @@ import { useRouter } from 'next/router'
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
 import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import { Layout } from '@components/common'
-import { Container, Logo, Button, Input } from '@components/ui'
+import { Container, Button, Input } from '@components/ui'
 import { defatultPageProps } from '@lib/defaults'
+import LogoFull from '@components/ui/LogoFull'
 
 export async function getStaticProps({
   preview,
@@ -43,7 +44,7 @@ export default function Register() {
         <div className="justify-self-center w-full md:w-3/5">
           <form onSubmit={click}>
             <div className="flex justify-center pb-12 ">
-              <Logo width="64px" height="64px" />
+              <LogoFull width="64px" height="64px" />
             </div>
             <div className="flex flex-col space-y-4 w-full">
               <Input placeholder="Seller" onChange={setSeller} />
