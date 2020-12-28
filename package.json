@@ -42,12 +42,14 @@
     ]
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^0.2.33",
     "@bigcommerce/storefront-data-hooks": "^1.0.2",
     "@reach/portal": "^0.11.2",
     "@tailwindcss/ui": "^0.6.2",
     "@types/body-scroll-lock": "^2.6.1",
     "@types/lodash.throttle": "^4.1.6",
     "@vercel/fetch": "^6.1.0",
+    "aws-amplify": "^3.3.13",
     "axios": "^0.21.0",
     "body-scroll-lock": "^3.1.5",
     "bowser": "^2.11.0",

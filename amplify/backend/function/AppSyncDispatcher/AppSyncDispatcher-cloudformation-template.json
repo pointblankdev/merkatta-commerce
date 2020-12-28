@@ -69,7 +69,8 @@
             },
             "API_MERKATTAAPI_GRAPHQLAPIENDPOINTOUTPUT": {
               "Ref": "apiMerkattaAPIGraphQLAPIEndpointOutput"
-            }
+            },
+            "ACCESS_TOKEN": ""
           }
         },
         "Role": {
@@ -83,7 +84,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-merkattacommerce-dev-202516-deployment",
-          "S3Key": "amplify-builds/AppSyncDispatcher-51356470626e30544c73-build.zip"
+          "S3Key": "amplify-builds/AppSyncDispatcher-42393239385257545872-build.zip"
         }
       }
     },
@@ -187,13 +188,7 @@
             {
               "Effect": "Allow",
               "Action": [
-                "appsync:Create*",
-                "appsync:StartSchemaCreation",
-                "appsync:GraphQL",
-                "appsync:Get*",
-                "appsync:List*",
-                "appsync:Update*",
-                "appsync:Delete*"
+                "appsync:GraphQL"
               ],
               "Resource": [
                 {
@@ -212,7 +207,67 @@
                       {
                         "Ref": "apiMerkattaAPIGraphQLAPIIdOutput"
                       },
-                      "/*"
+                      "/types/create/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apiMerkattaAPIGraphQLAPIIdOutput"
+                      },
+                      "/types/read/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apiMerkattaAPIGraphQLAPIIdOutput"
+                      },
+                      "/types/update/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apiMerkattaAPIGraphQLAPIIdOutput"
+                      },
+                      "/types/delete/*"
                     ]
                   ]
                 }
