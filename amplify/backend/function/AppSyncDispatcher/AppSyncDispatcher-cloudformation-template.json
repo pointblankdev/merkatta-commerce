@@ -95,7 +95,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-merkattacommerce-dev-202516-deployment",
-          "S3Key": "amplify-builds/AppSyncDispatcher-4f65473557544a722f78-build.zip"
+          "S3Key": "amplify-builds/AppSyncDispatcher-37657435495976794245-build.zip"
         }
       }
     },
