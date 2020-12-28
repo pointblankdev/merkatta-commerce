@@ -4,7 +4,8 @@ import { Layout } from '@components/common'
 import { Container, Products, Settings } from '@components/ui'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
-import { Amplify } from 'aws-amplify'
+import { Amplify, withSSRContext } from 'aws-amplify'
+import { listProducts } from '@lib/graphql/queries'
 
 // TODO: find a way to do this properly with vercel + amplify
 const awsmobile = {
@@ -23,7 +24,18 @@ const awsmobile = {
 
 Amplify.configure({ ...awsmobile, ssr: true })
 
-export default function Dashboard() {
+export async function getServerSideProps({ req }) {
+  const SSR = withSSRContext({ req })
+  const response = await SSR.API.graphql({ query: listProducts })
+
+  return {
+    props: {
+      posts: response.data.listProducts.items,
+    },
+  }
+}
+
+export default function Dashboard({ products = [] }) {
   const categories = [
     { index: 0, label: 'Product' },
     { index: 1, label: 'Settings' },

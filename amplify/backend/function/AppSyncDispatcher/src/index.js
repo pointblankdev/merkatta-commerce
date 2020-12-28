@@ -7,38 +7,58 @@ Amplify Params - DO NOT EDIT */
 
 var request = require('request')
 
-var options = {
-  method: 'POST',
-  url: `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products`,
-  headers: {
-    'content-type': 'application/json',
-    accept: 'application/json',
-    'x-auth-token': process.env.ACCESS_TOKEN,
+const resolvers = {
+  Query: {
+    listProducts: (event) => {
+      console.log(event)
+      return []
+    },
   },
-  body: {
-    name: 'Create product with image 2',
-    price: '10.00',
-    categories: [23],
-    weight: 4,
-    type: 'physical',
-    images: [
-      {
-        image_url:
-          'https://upload.wikimedia.org/wikipedia/commons/7/7f/Anglel_Bless_Legendary_Hills_1_m%C4%9Bs%C3%ADc_st%C3%A1%C5%99%C3%AD.jpg',
-      },
-    ],
+  Mutation: {
+    createOrUpdateProduct: async (event) => {
+      console.log(event)
+      const data = await new Promise((resolve, reject) => {
+        const options = {
+          method: 'POST',
+          url: `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products`,
+          headers: {
+            'content-type': 'application/json',
+            accept: 'application/json',
+            'x-auth-token': process.env.ACCESS_TOKEN,
+          },
+          body: {
+            name: 'Create product with image ' + Math.random() * 100,
+            price: '10.00',
+            categories: [23],
+            weight: 4,
+            type: 'physical',
+            images: [
+              {
+                image_url:
+                  'https://upload.wikimedia.org/wikipedia/commons/7/7f/Anglel_Bless_Legendary_Hills_1_m%C4%9Bs%C3%ADc_st%C3%A1%C5%99%C3%AD.jpg',
+              },
+            ],
+          },
+          json: true,
+        }
+        request(options, (error, response, body) => {
+          if (error) reject(error)
+          resolve(body)
+        })
+      })
+      console.log(data)
+      return { statusCode: 200 }
+    },
   },
-  json: true,
 }
 
 exports.handler = async (event) => {
-  const data = await new Promise(function (resolve, reject) {
-    request(options, function (error, response, body) {
-      if (error) reject(error)
-      resolve(body)
-    })
-  })
-
-  console.log(data)
-  return { statusCode: 200 }
+  const typeHandler = resolvers[event.typeName]
+  if (typeHandler) {
+    const resolver = typeHandler[event.fieldName]
+    if (resolver) {
+      return await resolver(event)
+    }
+  }
+  throw new Error('Resolver not found.')
 }
