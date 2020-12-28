@@ -42,7 +42,6 @@
     ]
   },
   "dependencies": {
-    "@aws-amplify/ui-react": "^0.2.33",
     "@bigcommerce/storefront-data-hooks": "^1.0.2",
     "@reach/portal": "^0.11.2",
     "@tailwindcss/ui": "^0.6.2",

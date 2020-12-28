@@ -4,8 +4,7 @@ import { Layout } from '@components/common'
 import { Button, Container, Input } from '@components/ui'
 import LogoFull from '@components/ui/LogoFull'
 
-import { Amplify } from 'aws-amplify'
-import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
+import { Amplify, Auth } from 'aws-amplify'
 
 // TODO: find a way to do this properly with vercel + amplify
 const awsmobile = {
@@ -29,46 +28,42 @@ export default function Signin() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const click = (e) => {
+  const click = async (e) => {
     e.preventDefault()
     router.push('/vendor/dashboard')
   }
 
   return (
     <Container>
-      <AmplifyAuthenticator>
-        <div className="grid justify-center h-screen content-center">
-          <div className="justify-self-center">
-            <form onSubmit={click}>
-              <div className="flex justify-center pb-12">
-                <LogoFull />
-              </div>
-              <div className="flex flex-col space-y-4 w-full">
-                <Input placeholder="email" onChange={setEmail} />
-                <Input
-                  type="password"
-                  placeholder="password"
-                  onChange={setPassword}
-                />
-                <Button type="submit" variant="slim">
-                  Sign In
-                </Button>
-                <span className="pt-1 text-center text-sm">
-                  <span className="text-accents-7">
-                    Don't have an account?{' '}
-                  </span>
-                  <a
-                    className="text-accent-9 font-bold hover:underline cursor-pointer"
-                    href="/vendor/register"
-                  >
-                    Sign Up
-                  </a>
-                </span>
-              </div>
-            </form>
-          </div>
+      <div className="grid justify-center h-screen content-center">
+        <div className="justify-self-center">
+          <form onSubmit={click}>
+            <div className="flex justify-center pb-12">
+              <LogoFull />
+            </div>
+            <div className="flex flex-col space-y-4 w-full">
+              <Input placeholder="email" onChange={setEmail} />
+              <Input
+                type="password"
+                placeholder="password"
+                onChange={setPassword}
+              />
+              <Button type="submit" variant="slim">
+                Sign In
+              </Button>
+              <span className="pt-1 text-center text-sm">
+                <span className="text-accents-7">Don't have an account? </span>
+                <a
+                  className="text-accent-9 font-bold hover:underline cursor-pointer"
+                  href="/vendor/register"
+                >
+                  Sign Up
+                </a>
+              </span>
+            </div>
+          </form>
         </div>
-      </AmplifyAuthenticator>
+      </div>
     </Container>
   )
 }
