@@ -5,9 +5,22 @@ import { Container, Products, Settings } from '@components/ui'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import { Amplify } from 'aws-amplify'
-import awsExports from '../../lib/aws-exports'
 
-Amplify.configure({ ...awsExports, ssr: true })
+const awsmobile = {
+  aws_project_region: 'us-east-2',
+  aws_cognito_identity_pool_id:
+    'us-east-2:8afaf5f9-57dd-4453-b450-19f123a7b401',
+  aws_cognito_region: 'us-east-2',
+  aws_user_pools_id: 'us-east-2_7XL26x0Ki',
+  aws_user_pools_web_client_id: '262nusf7sdqovsutecoinufr2m',
+  oauth: {},
+  aws_appsync_graphqlEndpoint:
+    'https://u7b3kybfgnf3hotw3invwqgewy.appsync-api.us-east-2.amazonaws.com/graphql',
+  aws_appsync_region: 'us-east-2',
+  aws_appsync_authenticationType: 'AWS_IAM',
+}
+
+Amplify.configure({ ...awsmobile, ssr: true })
 
 export default function Dashboard() {
   const categories = [

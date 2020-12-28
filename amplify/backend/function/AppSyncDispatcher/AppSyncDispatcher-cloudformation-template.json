@@ -17,6 +17,12 @@
     "apiMerkattaAPIGraphQLAPIEndpointOutput": {
       "Type": "String",
       "Default": "apiMerkattaAPIGraphQLAPIEndpointOutput"
+    },
+    "accessToken": {
+      "Type": "String"
+    },
+    "storeHash": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -70,21 +76,23 @@
             "API_MERKATTAAPI_GRAPHQLAPIENDPOINTOUTPUT": {
               "Ref": "apiMerkattaAPIGraphQLAPIEndpointOutput"
             },
-            "ACCESS_TOKEN": ""
+            "ACCESS_TOKEN": {
+              "Ref": "accessToken"
+            },
+            "STORE_HASH": {
+              "Ref": "storeHash"
+            }
           }
         },
         "Role": {
-          "Fn::GetAtt": [
-            "LambdaExecutionRole",
-            "Arn"
-          ]
+          "Fn::GetAtt": ["LambdaExecutionRole", "Arn"]
         },
         "Runtime": "nodejs12.x",
         "Layers": [],
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-merkattacommerce-dev-202516-deployment",
-          "S3Key": "amplify-builds/AppSyncDispatcher-42393239385257545872-build.zip"
+          "S3Key": "amplify-builds/AppSyncDispatcher-784b464a33326676692b-build.zip"
         }
       }
     },
@@ -115,22 +123,16 @@
             {
               "Effect": "Allow",
               "Principal": {
-                "Service": [
-                  "lambda.amazonaws.com"
-                ]
+                "Service": ["lambda.amazonaws.com"]
               },
-              "Action": [
-                "sts:AssumeRole"
-              ]
+              "Action": ["sts:AssumeRole"]
             }
           ]
         }
       }
     },
     "lambdaexecutionpolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
+      "DependsOn": ["LambdaExecutionRole"],
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "lambda-execution-policy",
@@ -171,9 +173,7 @@
       }
     },
     "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
+      "DependsOn": ["LambdaExecutionRole"],
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "amplify-lambda-execution-policy",
@@ -187,9 +187,7 @@
           "Statement": [
             {
               "Effect": "Allow",
-              "Action": [
-                "appsync:GraphQL"
-              ],
+              "Action": ["appsync:GraphQL"],
               "Resource": [
                 {
                   "Fn::Join": [
@@ -286,10 +284,7 @@
     },
     "Arn": {
       "Value": {
-        "Fn::GetAtt": [
-          "LambdaFunction",
-          "Arn"
-        ]
+        "Fn::GetAtt": ["LambdaFunction", "Arn"]
       }
     },
     "Region": {
