@@ -6,6 +6,7 @@ import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import { Amplify } from 'aws-amplify'
 
+// TODO: find a way to do this properly with vercel + amplify
 const awsmobile = {
   aws_project_region: 'us-east-2',
   aws_cognito_identity_pool_id:
@@ -17,7 +18,7 @@ const awsmobile = {
   aws_appsync_graphqlEndpoint:
     'https://u7b3kybfgnf3hotw3invwqgewy.appsync-api.us-east-2.amazonaws.com/graphql',
   aws_appsync_region: 'us-east-2',
-  aws_appsync_authenticationType: 'AWS_IAM',
+  aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
 }
 
 Amplify.configure({ ...awsmobile, ssr: true })

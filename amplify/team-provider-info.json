@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "merkattacommerce137e0ea1": {}
+      },
+      "function": {
+        "AppSyncDispatcher": {}
       }
     }
   }
