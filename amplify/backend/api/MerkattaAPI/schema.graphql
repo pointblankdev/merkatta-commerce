@@ -4,8 +4,13 @@ type Vendor @model @auth(rules: [{ allow: owner }]) {
 }
 
 type Product {
-  id: ID!
+  id: ID
   name: String
+  description: String
+  image: String
+  sku: String
+  weight: Float
+  price: Float
 }
 
 type Query {
@@ -18,6 +23,11 @@ type Mutation {
 }
 
 input ProductInput {
-  id: ID!
+  id: ID
   name: String
+  description: String
+  image: String
+  sku: String
+  weight: Float
+  price: Float
 }

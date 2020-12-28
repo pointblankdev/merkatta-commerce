@@ -26,11 +26,11 @@ Amplify.configure({ ...awsmobile, ssr: true })
 
 export async function getServerSideProps({ req }) {
   const SSR = withSSRContext({ req })
-  const response = await SSR.API.graphql({ query: listProducts })
+  const { data } = await SSR.API.graphql({ query: listProducts })
 
   return {
     props: {
-      posts: response.data.listProducts.items,
+      products: data.listProducts,
     },
   }
 }
@@ -65,7 +65,11 @@ export default function Dashboard({ products = [] }) {
             </ul>
           </div>
           <div className="col-span-10">
-            {activeCategory === 0 ? <Products /> : <Settings />}
+            {activeCategory === 0 ? (
+              <Products products={products} />
+            ) : (
+              <Settings />
+            )}
           </div>
         </div>
       </AmplifyAuthenticator>
