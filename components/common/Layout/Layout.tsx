@@ -57,9 +57,9 @@ const Layout: FC<Props> = ({ children, pageProps }) => {
 
   return (
     <CommerceProvider locale={locale}>
-      <div className={cn(s.root)}>
+      <div className={cn(s.root) + " flex flex-col"}>
         <Navbar />
-        <main className="fit">{children}</main>
+        <main className="flex-grow">{children}</main>
         <Footer pages={pageProps.pages} />
 
         <Sidebar open={displaySidebar} onClose={closeSidebar}>
