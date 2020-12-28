@@ -9,7 +9,7 @@ var request = require('request')
 
 var options = {
   method: 'POST',
-  url: 'https://api.bigcommerce.com/stores/mvk5ue8r3o/v3/catalog/products',
+  url: `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products`,
   headers: {
     'content-type': 'application/json',
     accept: 'application/json',
