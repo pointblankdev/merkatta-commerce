@@ -1,12 +1,12 @@
 {
-  "title": "ACME Storefront | Powered by Next.js Commerce",
-  "titleTemplate": "%s - ACME Storefront",
-  "description": "Next.js Commerce -> https://www.nextjs.org/commerce",
+  "title": "Merkatta Commerce",
+  "titleTemplate": "%s - Wholesale Packaging",
+  "description": "Merkatta Commerce - Wholesale Packaging",
   "openGraph": {
     "type": "website",
     "locale": "en_IE",
-    "url": "https://nextjs.org/commerce",
-    "site_name": "Next.js Commerce"
+    "url": "https://merkatta.com",
+    "site_name": "Merkatta Commerce"
   },
   "twitter": {
     "handle": "@nextjs",
