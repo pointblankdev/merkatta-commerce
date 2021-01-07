@@ -1,53 +1,62 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { Layout } from '@components/common'
 import { Button, Container, Input } from '@components/ui'
 import LogoFull from '@components/ui/LogoFull'
-
-import { Amplify, Auth } from 'aws-amplify'
-
-// TODO: find a way to do this properly with vercel + amplify
-const awsmobile = {
-  aws_project_region: 'us-east-2',
-  aws_cognito_identity_pool_id:
-    'us-east-2:8afaf5f9-57dd-4453-b450-19f123a7b401',
-  aws_cognito_region: 'us-east-2',
-  aws_user_pools_id: 'us-east-2_7XL26x0Ki',
-  aws_user_pools_web_client_id: '262nusf7sdqovsutecoinufr2m',
-  oauth: {},
-  aws_appsync_graphqlEndpoint:
-    'https://u7b3kybfgnf3hotw3invwqgewy.appsync-api.us-east-2.amazonaws.com/graphql',
-  aws_appsync_region: 'us-east-2',
-  aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
-}
-
-Amplify.configure({ ...awsmobile, ssr: true })
+import { useUser } from '@lib/hooks'
+import { Magic } from 'magic-sdk'
 
 export default function Signin() {
   const router = useRouter()
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
 
-  const click = async (e) => {
+  useUser({ redirectTo: '/vendor/dashboard', redirectIfFound: true })
+
+  const [errorMsg, setErrorMsg] = useState('')
+
+  async function handleSubmit(e) {
     e.preventDefault()
-    router.push('/vendor/dashboard')
+
+    if (errorMsg) setErrorMsg('')
+
+    const body = {
+      email: e.currentTarget.email.value,
+    }
+
+    try {
+      const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY)
+      const didToken = await magic.auth.loginWithMagicLink({
+        email: body.email,
+      })
+      const res = await fetch('/api/vendor/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + didToken,
+        },
+        body: JSON.stringify(body),
+      })
+      if (res.status === 200) {
+        Router.push('/')
+      } else {
+        throw new Error(await res.text())
+      }
+    } catch (error) {
+      console.error('An unexpected error happened occurred:', error)
+      setErrorMsg(error.message)
+    }
   }
 
   return (
     <Container>
       <div className="grid justify-center h-screen content-center">
         <div className="justify-self-center">
-          <form onSubmit={click}>
+          <form onSubmit={handleSubmit}>
             <div className="flex justify-center pb-12">
               <LogoFull />
             </div>
             <div className="flex flex-col space-y-4 w-full">
-              <Input placeholder="email" onChange={setEmail} />
-              <Input
-                type="password"
-                placeholder="password"
-                onChange={setPassword}
-              />
+              <Input name="email" placeholder="email" onChange={setEmail} />
               <Button type="submit" variant="slim">
                 Sign In
               </Button>
