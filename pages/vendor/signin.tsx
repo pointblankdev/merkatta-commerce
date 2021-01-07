@@ -37,7 +37,7 @@ export default function Signin() {
         body: JSON.stringify(body),
       })
       if (res.status === 200) {
-        Router.push('/')
+        Router.push('/vendor/dashboard')
       } else {
         throw new Error(await res.text())
       }

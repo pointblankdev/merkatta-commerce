@@ -14,6 +14,6 @@ export default async function logout(req, res) {
     console.error(error)
   }
 
-  res.writeHead(302, { Location: '/' })
+  res.writeHead(302, { Location: '/vendor/signin' })
   res.end()
 }
