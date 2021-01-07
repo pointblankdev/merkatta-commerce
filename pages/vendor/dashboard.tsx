@@ -2,26 +2,42 @@ import cn from 'classnames'
 import { useState } from 'react'
 import { Layout } from '@components/common'
 import { Container, Products, Settings } from '@components/ui'
+import { getBrandIdFromSession, getLoginSession } from '@lib/vendor/auth'
+import { useUser } from '@lib/vendor/hooks'
 
-const url = `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products`
-const headers = {
-  'content-type': 'application/json',
-  accept: 'application/json',
-  'x-auth-token': process.env.ACCESS_TOKEN,
-}
+export async function getServerSideProps(ctx) {
+  try {
+    const session = await getLoginSession(ctx.req)
+    const brandId = await getBrandIdFromSession(session)
+    // Each vendor account is associated with a BigCommerce 'Brand'
+    const { data, error } = await fetch(
+      `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products?brand_id=${brandId}`,
+      {
+        headers: {
+          'content-type': 'application/json',
+          accept: 'application/json',
+          'x-auth-token': process.env.ACCESS_TOKEN,
+        },
+      }
+    ).then((r) => r.json())
 
-export async function getStaticProps({ req }) {
-  const res = await fetch(url, { headers })
-  const products = await res.json()
-
-  return {
-    props: {
-      products: products.data,
-    },
+    return {
+      props: {
+        products: data,
+      },
+    }
+  } catch (e) {
+    console.error(e)
+    return {
+      props: {
+        products: [],
+      },
+    }
   }
 }
 
 export default function Dashboard({ products = [] }) {
+  useUser({ redirectTo: '/vendor/signin', redirectIfFound: false })
   const categories = [
     { index: 0, label: 'Product' },
     { index: 1, label: 'Settings' },

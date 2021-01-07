@@ -1,6 +1,6 @@
-import { magic } from '../../../lib/magic'
-import { removeTokenCookie } from '../../../lib/auth-cookies'
-import { getLoginSession } from '../../../lib/auth'
+import { magic } from '@lib/vendor/magic'
+import { removeTokenCookie } from '@lib/vendor/auth-cookies'
+import { getLoginSession } from '@lib/vendor/auth'
 
 export default async function logout(req, res) {
   try {

@@ -3,7 +3,7 @@ import Router, { useRouter } from 'next/router'
 import { Layout } from '@components/common'
 import { Button, Container, Input } from '@components/ui'
 import LogoFull from '@components/ui/LogoFull'
-import { useUser } from '@lib/hooks'
+import { useUser } from '@lib/vendor/hooks'
 import { Magic } from 'magic-sdk'
 
 export default function Signin() {

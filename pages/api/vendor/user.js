@@ -1,4 +1,4 @@
-import { getLoginSession } from '../../../lib/auth'
+import { getLoginSession } from '@lib/vendor/auth'
 
 export default async function user(req, res) {
   const session = await getLoginSession(req)

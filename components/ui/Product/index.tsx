@@ -277,7 +277,7 @@ const Products = ({ products = [] }) => {
                   <ProductHeader />
                   <tbody className="bg-white divide-y divide-gray-200">
                     {products.map((product) => (
-                      <ProductItem props={product} />
+                      <ProductItem key={product.id} props={product} />
                     ))}
                   </tbody>
                 </table>
