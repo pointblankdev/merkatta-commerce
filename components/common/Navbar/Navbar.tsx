@@ -6,7 +6,7 @@ import throttle from 'lodash.throttle'
 import s from './Navbar.module.css'
 import { Logo, Container } from '@components/ui'
 import { Searchbar, UserNav } from '@components/common'
-
+import Avatar from '../Avatar'
 
 const Navbar: FC = () => {
   const [hasScrolled, setHasScrolled] = useState(false)
@@ -54,13 +54,24 @@ const Navbar: FC = () => {
               </Link>
             </nav>
           </div>
-          {router.pathname !== '/vendor/signin' && router.pathname !== '/vendor/register' && (
+          {!router.pathname.includes('/vendor') && (
             <>
               <div className="flex-1 justify-center">
-                <Searchbar />  
+                <Searchbar />
               </div>
               <div className="flex flex-1 justify-end space-x-8">
                 <UserNav />
+              </div>
+            </>
+          )}
+          {router.pathname.includes('/vendor/dashboard') && (
+            <>
+              <div className="flex flex-1 justify-end space-x-8">
+                <Link href="/api/vendor/logout">
+                  <a>
+                    <Avatar />
+                  </a>
+                </Link>
               </div>
             </>
           )}
