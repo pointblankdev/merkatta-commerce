@@ -4,6 +4,7 @@ import useLogin from '@bigcommerce/storefront-data-hooks/use-login'
 import { useUI } from '@components/ui/context'
 import { validate } from 'email-validator'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 
 interface Props {}
 
@@ -96,6 +97,18 @@ const LoginView: FC<Props> = () => {
           >
             Sign Up
           </a>
+        </div>
+        <div className="pt-1 text-center text-sm">
+          <span className="text-accents-7">Are you a vendor?</span>
+          {` `}
+          <Link href="/vendor/signin">
+            <a
+              className="text-accent-9 font-bold hover:underline cursor-pointer"
+              onClick={() => closeModal()}
+            >
+              Sign In Here
+            </a>
+          </Link>
         </div>
       </div>
     </form>
