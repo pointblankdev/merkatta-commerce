@@ -23,6 +23,7 @@ export default function Signin() {
       email,
     }
 
+    // TODO: Centralize into consumer
     try {
       const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY)
       const didToken = await magic.auth.loginWithMagicLink({
