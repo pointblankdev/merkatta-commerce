@@ -102,21 +102,26 @@ const Products = ({ products = [] }) => {
   //   }
   // ])
   const [hideProductModal, setHideProductModal] = useState(true)
-  const [title, setTitle] = useState('')
+  const [name, setName] = useState('')
   const [unit, setUnit] = useState('')
   const [description, setDescription] = useState('')
   const [showUnitDropdown, setShowUnitDropdown] = useState(false)
-  const [SKU, setSKU] = useState('')
+  const [weight, setWeight] = useState('')
   const [price, setPrice] = useState('')
 
-  const addProduct = () => {
+  const addProduct = async () => {
     // setProducts([...products, { title, description, image: "", sku: SKU, price }])
-    setTitle('')
+    setName('')
     setUnit('')
     setDescription('')
-    setSKU('')
+    setWeight('')
     setPrice('')
     setHideProductModal(true)
+    const response = await fetch('/api/vendor/product', {
+      method: 'post',
+      body: JSON.stringify({ name, description, price, weight }),
+    }).then((r) => r.json())
+    products.push(response.data)
   }
 
   const selectUnitDropdown = (unit) => {
@@ -164,7 +169,7 @@ const Products = ({ products = [] }) => {
                         </p>
                         <form onSubmit={addProduct}>
                           <div className="flex flex-col space-y-4 w-full my-6">
-                            <Input placeholder="name" onChange={setTitle} />
+                            <Input placeholder="name" onChange={setName} />
                             <div className="relative inline-block text-left">
                               <div>
                                 <button
@@ -234,8 +239,18 @@ const Products = ({ products = [] }) => {
                               placeholder="description"
                               onChange={setDescription}
                             />
-                            <Input placeholder="SKU" onChange={setSKU} />
-                            <Input placeholder="price" onChange={setPrice} />
+                            <Input
+                              type="number"
+                              step="0.01"
+                              placeholder="price"
+                              onChange={setPrice}
+                            />
+                            <Input
+                              type="number"
+                              step="0.01"
+                              placeholder="weight"
+                              onChange={setWeight}
+                            />
                           </div>
                         </form>
                       </div>
@@ -245,21 +260,21 @@ const Products = ({ products = [] }) => {
                 <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                   <button
                     disabled={
-                      title === '' ||
+                      name === '' ||
                       description === '' ||
                       unit === '' ||
-                      SKU === '' ||
+                      weight === '' ||
                       price === ''
                     }
                     onClick={addProduct}
-                    type="button"
+                    type="submit"
                     className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                   >
                     Add
                   </button>
                   <button
                     onClick={() => setHideProductModal(true)}
-                    type="button"
+                    type="reset"
                     className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                   >
                     Cancel
