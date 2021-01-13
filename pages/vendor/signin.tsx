@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { Layout } from '@components/common'
 import { Button, Container, Input } from '@components/ui'
 import LogoFull from '@components/ui/LogoFull'
@@ -20,7 +20,7 @@ export default function Signin() {
     if (errorMsg) setErrorMsg('')
 
     const body = {
-      email: e.currentTarget.email.value,
+      email,
     }
 
     try {
@@ -37,12 +37,12 @@ export default function Signin() {
         body: JSON.stringify(body),
       })
       if (res.status === 200) {
-        Router.push('/vendor/dashboard')
+        router.push('/vendor/dashboard')
       } else {
         throw new Error(await res.text())
       }
     } catch (error) {
-      console.error('An unexpected error happened occurred:', error)
+      console.error('An unexpected error occurred:', error)
       setErrorMsg(error.message)
     }
   }
@@ -57,7 +57,7 @@ export default function Signin() {
             </div>
             <div className="flex flex-col space-y-4 w-full">
               <Input name="email" placeholder="email" onChange={setEmail} />
-              <Button type="submit" variant="slim">
+              <Button type="submit" variant="slim" disabled={email === ''}>
                 Sign In
               </Button>
               <span className="pt-1 text-center text-sm">
