@@ -28,13 +28,13 @@ const ProductCard: FC<Props> = ({
   imgPriority,
   imgLoading,
   imgSizes,
-  imgLayout = 'responsive',
+  imgLayout = 'responsive'
 }) => {
   const src = p.images.edges?.[0]?.node?.urlOriginal!
   const { price } = usePrice({
     amount: p.prices?.price?.value,
     baseAmount: p.prices?.retailPrice?.value,
-    currencyCode: p.prices?.price?.currencyCode!,
+    currencyCode: p.prices?.price?.currencyCode!
   })
 
   return (
@@ -42,7 +42,8 @@ const ProductCard: FC<Props> = ({
       <a
         className={cn(s.root, { [s.simple]: variant === 'simple' }, className)}
       >
-        {variant === 'slim' ? (
+        {variant === 'slim'
+          ? (
           <div className="relative overflow-hidden box-border">
             <div className="absolute inset-0 flex items-center justify-end mr-8 z-20">
               <span className="bg-black text-white inline-block p-3 font-bold text-xl break-words">
@@ -61,7 +62,8 @@ const ProductCard: FC<Props> = ({
               alt={p.images.edges?.[0]?.node.altText || 'Product Image'}
             />
           </div>
-        ) : (
+            )
+          : (
           <>
             <div className={s.squareBg} />
             <div className="flex flex-row justify-between box-border w-full z-20 absolute">
@@ -78,21 +80,23 @@ const ProductCard: FC<Props> = ({
               />
             </div>
             <div className={s.imageContainer}>
-              <Image
-                quality="85"
-                src={src}
-                alt={p.name}
-                className={s.image}
-                width={imgWidth}
-                sizes={imgSizes}
-                height={imgHeight}
-                layout={imgLayout}
-                loading={imgLoading}
-                priority={imgPriority}
-              />
+              {src && (
+                <Image
+                  quality="85"
+                  src={src}
+                  alt={p.name}
+                  className={s.image}
+                  width={imgWidth}
+                  sizes={imgSizes}
+                  height={imgHeight}
+                  layout={imgLayout}
+                  loading={imgLoading}
+                  priority={imgPriority}
+                />
+              )}
             </div>
           </>
-        )}
+            )}
       </a>
     </Link>
   )

@@ -6,7 +6,7 @@ import LogoFull from '@components/ui/LogoFull'
 import { useUser } from '@lib/vendor/hooks'
 import { Magic } from 'magic-sdk'
 
-export default function Signin() {
+export default function Signin () {
   const router = useRouter()
   const [email, setEmail] = useState('')
 
@@ -14,27 +14,27 @@ export default function Signin() {
 
   const [errorMsg, setErrorMsg] = useState('')
 
-  async function handleSubmit(e) {
+  async function handleSubmit (e) {
     e.preventDefault()
 
     if (errorMsg) setErrorMsg('')
 
     const body = {
-      email: e.currentTarget.email.value,
+      email: e.currentTarget.email.value
     }
 
     try {
       const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY)
       const didToken = await magic.auth.loginWithMagicLink({
-        email: body.email,
+        email: body.email
       })
       const res = await fetch('/api/vendor/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + didToken,
+          Authorization: 'Bearer ' + didToken
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       })
       if (res.status === 200) {
         Router.push('/vendor/dashboard')
@@ -56,9 +56,13 @@ export default function Signin() {
               <LogoFull />
             </div>
             <div className="flex flex-col space-y-4 w-full">
-              <Input name="email" placeholder="email" onChange={setEmail} />
+              <Input
+                name="email"
+                placeholder="Email address"
+                onChange={setEmail}
+              />
               <Button type="submit" variant="slim">
-                Sign In
+                Sign in with magic link
               </Button>
               <span className="pt-1 text-center text-sm">
                 <span className="text-accents-7">Don't have an account? </span>
