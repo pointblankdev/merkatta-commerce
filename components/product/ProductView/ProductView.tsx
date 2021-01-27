@@ -14,7 +14,7 @@ import type { ProductNode } from '@bigcommerce/storefront-data-hooks/api/operati
 import {
   getCurrentVariant,
   getProductOptions,
-  SelectedOptions,
+  SelectedOptions
 } from '../helpers'
 import WishlistButton from '@components/wishlist/WishlistButton'
 
@@ -29,14 +29,14 @@ const ProductView: FC<Props> = ({ product }) => {
   const { price } = usePrice({
     amount: product.prices?.price?.value,
     baseAmount: product.prices?.retailPrice?.value,
-    currencyCode: product.prices?.price?.currencyCode!,
+    currencyCode: product.prices?.price?.currencyCode!
   })
   const { openSidebar } = useUI()
   const options = getProductOptions(product)
   const [loading, setLoading] = useState(false)
   const [choices, setChoices] = useState<SelectedOptions>({
     size: null,
-    color: null,
+    color: null
   })
   const variant =
     getCurrentVariant(product, choices) || product.variants.edges?.[0]
@@ -46,7 +46,7 @@ const ProductView: FC<Props> = ({ product }) => {
     try {
       await addItem({
         productId: product.entityId,
-        variantId: product.variants.edges?.[0]?.node.entityId!,
+        variantId: product.variants.edges?.[0]?.node.entityId!
       })
       openSidebar()
       setLoading(false)
@@ -69,9 +69,9 @@ const ProductView: FC<Props> = ({ product }) => {
               url: product.images.edges?.[0]?.node.urlOriginal!,
               width: 800,
               height: 600,
-              alt: product.name,
-            },
-          ],
+              alt: product.name
+            }
+          ]
         }}
       />
       <div className={cn(s.root, 'fit')}>
@@ -79,9 +79,7 @@ const ProductView: FC<Props> = ({ product }) => {
           <div className={s.nameBox}>
             <h1 className={s.name}>{product.name}</h1>
             <div className={s.price}>
-              {price}
-              {` `}
-              {product.prices?.price.currencyCode}
+              {price} {product.prices?.price.currencyCode}
             </div>
           </div>
 
@@ -124,7 +122,7 @@ const ProductView: FC<Props> = ({ product }) => {
                           setChoices((choices) => {
                             return {
                               ...choices,
-                              [opt.displayName]: v.label,
+                              [opt.displayName]: v.label
                             }
                           })
                         }}
@@ -148,7 +146,7 @@ const ProductView: FC<Props> = ({ product }) => {
               loading={loading}
               disabled={!variant}
             >
-              Add to Cart
+              Contact Seller
             </Button>
           </div>
         </div>

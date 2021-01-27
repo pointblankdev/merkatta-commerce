@@ -10,9 +10,9 @@ import getAllProducts from '@bigcommerce/storefront-data-hooks/api/operations/ge
 import getSiteInfo from '@bigcommerce/storefront-data-hooks/api/operations/get-site-info'
 import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 
-export async function getStaticProps({
+export async function getStaticProps ({
   preview,
-  locale,
+  locale
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
 
@@ -20,21 +20,21 @@ export async function getStaticProps({
   const { products: featuredProducts } = await getAllProducts({
     variables: { field: 'featuredProducts', first: 6 },
     config,
-    preview,
+    preview
   })
 
   // Get Best Selling Products
   const { products: bestSellingProducts } = await getAllProducts({
     variables: { field: 'bestSellingProducts', first: 6 },
     config,
-    preview,
+    preview
   })
 
   // Get Best Newest Products
   const { products: newestProducts } = await getAllProducts({
     variables: { field: 'newestProducts', first: 12 },
     config,
-    preview,
+    preview
   })
 
   const { categories, brands } = await getSiteInfo({ config, preview })
@@ -56,7 +56,7 @@ export async function getStaticProps({
       bestSelling: rangeMap(
         6,
         (i) => bestSellingProducts[i] ?? products.shift()
-      ).filter(nonNullable),
+      ).filter(nonNullable)
     }
   })()
 
@@ -67,20 +67,20 @@ export async function getStaticProps({
       newestProducts,
       categories,
       brands,
-      pages,
+      pages
     },
-    revalidate: 14400,
+    revalidate: 14400
   }
 }
 
 const nonNullable = (v: any) => v
 
-export default function Home({
+export default function Home ({
   featured,
   bestSelling,
   brands,
   categories,
-  newestProducts,
+  newestProducts
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
