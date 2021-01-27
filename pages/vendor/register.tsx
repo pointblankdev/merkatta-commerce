@@ -7,6 +7,8 @@ import { Layout } from '@components/common'
 import { Container, Button, Input } from '@components/ui'
 import { defatultPageProps } from '@lib/defaults'
 import LogoFull from '@components/ui/LogoFull'
+import { useUser } from '@lib/vendor/hooks'
+import { Magic } from 'magic-sdk'
 
 export async function getStaticProps({
   preview,
@@ -22,37 +24,65 @@ export async function getStaticProps({
 export default function Register() {
   const [seller, setSeller] = useState('')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const [disabled, setDisabled] = useState(false)
   const router = useRouter()
 
-  const click = (e) => {
+  useUser({ redirectTo: '/vendor/dashboard', redirectIfFound: true })
+
+  const [errorMsg, setErrorMsg] = useState('')
+
+  async function handleSubmit(e) {
     e.preventDefault()
-    router.push("/vendor/dashboard")
+
+    if (errorMsg) setErrorMsg('')
+    // TODO: Add seller name to body, need to add field in backend
+    const body = {
+      email,
+    }
+
+    // TODO: Centralize into consumer
+    try {
+      const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY)
+      const didToken = await magic.auth.loginWithMagicLink({
+        email: body.email,
+      })
+      const res = await fetch('/api/vendor/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + didToken,
+        },
+        body: JSON.stringify(body),
+      })
+      if (res.status === 200) {
+        router.push('/vendor/dashboard')
+      } else {
+        throw new Error(await res.text())
+      }
+    } catch (error) {
+      console.error('An unexpected error occurred:', error)
+      setErrorMsg(error.message)
+    }
   }
 
   return (
     <Container>
-      <div className="grid justify-items-stretch h-screen content-center">
-        <div className="justify-self-center w-full md:w-3/5">
-          <form onSubmit={click}>
+      <div className="grid justify-center h-screen content-center">
+        <div className="justify-self-center">
+          <form onSubmit={handleSubmit}>
             <div className="flex justify-center pb-12 ">
               <LogoFull width="64px" height="64px" />
             </div>
             <div className="flex flex-col space-y-4 w-full">
               <Input placeholder="Company Name" onChange={setSeller} />
               <Input type="email" placeholder="Email" onChange={setEmail} />
-              <Input type="password" placeholder="Password" onChange={setPassword} />
-              <Input type="password" placeholder="Confirm Password" onChange={setConfirmPassword} />
 
               <div className="pt-2 w-full flex flex-col">
                 <Button
                   variant="slim"
                   type="submit"
                   loading={loading}
-                  disabled={disabled}
+                  disabled={email === '' || seller === ''}
                 >
                   Sign Up
                 </Button>
