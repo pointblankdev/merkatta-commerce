@@ -10,18 +10,18 @@ import LogoFull from '@components/ui/LogoFull'
 import { useUser } from '@lib/vendor/hooks'
 import { Magic } from 'magic-sdk'
 
-export async function getStaticProps({
+export async function getStaticProps ({
   preview,
-  locale,
+  locale
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ config, preview })
   return {
-    props: { ...defatultPageProps, pages },
+    props: { ...defatultPageProps, pages }
   }
 }
 
-export default function Register() {
+export default function Register () {
   const [seller, setSeller] = useState('')
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
@@ -31,28 +31,28 @@ export default function Register() {
 
   const [errorMsg, setErrorMsg] = useState('')
 
-  async function handleSubmit(e) {
+  async function handleSubmit (e) {
     e.preventDefault()
 
     if (errorMsg) setErrorMsg('')
     // TODO: Add seller name to body, need to add field in backend
     const body = {
-      email,
+      email
     }
 
     // TODO: Centralize into consumer
     try {
       const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY)
       const didToken = await magic.auth.loginWithMagicLink({
-        email: body.email,
+        email: body.email
       })
       const res = await fetch('/api/vendor/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + didToken,
+          Authorization: 'Bearer ' + didToken
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       })
       if (res.status === 200) {
         router.push('/vendor/dashboard')
@@ -67,8 +67,8 @@ export default function Register() {
 
   return (
     <Container>
-      <div className="grid justify-center h-screen content-center">
-        <div className="justify-self-center">
+      <div className="grid justify-center content-center">
+        <div className="justify-self-center lg:p-10 mt-20">
           <form onSubmit={handleSubmit}>
             <div className="flex justify-center pb-12 ">
               <LogoFull width="64px" height="64px" />
@@ -90,7 +90,10 @@ export default function Register() {
 
               <span className="pt-1 text-center text-sm">
                 <span className="text-accents-7">Do you have an account? </span>
-                <a className="text-accent-9 font-bold hover:underline cursor-pointer" href="/vendor/signin">
+                <a
+                  className="text-accent-9 font-bold hover:underline cursor-pointer"
+                  href="/vendor/signin"
+                >
                   Log In
                 </a>
               </span>
