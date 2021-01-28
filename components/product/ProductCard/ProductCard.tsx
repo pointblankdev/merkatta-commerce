@@ -30,13 +30,13 @@ const ProductCard: FC<Props> = ({
   imgSizes,
   imgLayout = 'responsive'
 }) => {
-  const src = p.images.edges?.[0]?.node?.urlOriginal!
+  const src = p.images.edges?.[0]?.node?.urlOriginal! || "/image-placeholder.png"
   const { price } = usePrice({
     amount: p.prices?.price?.value,
     baseAmount: p.prices?.retailPrice?.value,
     currencyCode: p.prices?.price?.currencyCode!
   })
-
+  console.log("This is a image source",src);
   return (
     <Link href={`/product${p.path}`}>
       <a
@@ -58,7 +58,7 @@ const ProductCard: FC<Props> = ({
               layout={imgLayout}
               loading={imgLoading}
               priority={imgPriority}
-              src={p.images.edges?.[0]?.node.urlOriginal!}
+              src={p.images.edges?.[0]?.node.urlOriginal! || "/image-placeholder.png"}
               alt={p.images.edges?.[0]?.node.altText || 'Product Image'}
             />
           </div>
