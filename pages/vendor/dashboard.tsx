@@ -5,7 +5,7 @@ import { Container, Products, Settings } from '@components/ui'
 import { getBrandIdFromSession, getLoginSession } from '@lib/vendor/auth'
 import { useUser } from '@lib/vendor/hooks'
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps (ctx) {
   try {
     const session = await getLoginSession(ctx.req)
     const brandId = await getBrandIdFromSession(session)
@@ -16,31 +16,31 @@ export async function getServerSideProps(ctx) {
         headers: {
           'content-type': 'application/json',
           accept: 'application/json',
-          'x-auth-token': process.env.ACCESS_TOKEN,
-        },
+          'x-auth-token': process.env.ACCESS_TOKEN
+        }
       }
     ).then((r) => r.json())
 
     return {
       props: {
-        products: data,
-      },
+        products: data
+      }
     }
   } catch (e) {
     console.error(e)
     return {
       props: {
-        products: [],
-      },
+        products: []
+      }
     }
   }
 }
 
-export default function Dashboard({ products = [] }) {
+export default function Dashboard ({ products = [] }) {
   useUser({ redirectTo: '/vendor/signin', redirectIfFound: false })
   const categories = [
     { index: 0, label: 'Product' },
-    { index: 1, label: 'Settings' },
+    { index: 1, label: 'Settings' }
   ]
   const [activeCategory, setActiveCategory] = useState(0)
 
@@ -67,11 +67,13 @@ export default function Dashboard({ products = [] }) {
           </ul>
         </div>
         <div className="col-span-10">
-          {activeCategory === 0 ? (
+          {activeCategory === 0
+            ? (
             <Products products={products} />
-          ) : (
+              )
+            : (
             <Settings />
-          )}
+              )}
         </div>
       </div>
     </Container>
