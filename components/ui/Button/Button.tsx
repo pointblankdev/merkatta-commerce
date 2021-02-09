@@ -3,7 +3,7 @@ import React, {
   forwardRef,
   ButtonHTMLAttributes,
   JSXElementConstructor,
-  useRef,
+  useRef
 } from 'react'
 import mergeRefs from 'react-merge-refs'
 import s from './Button.module.css'
@@ -19,6 +19,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   width?: string | number
   loading?: boolean
   disabled?: boolean
+  onClick?: any
 }
 
 const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
@@ -32,7 +33,7 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
     Component = 'button',
     loading = false,
     disabled = false,
-    style = {},
+    style = {}
   } = props
   const ref = useRef<typeof Component>(null)
 
@@ -41,7 +42,7 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
     {
       [s.slim]: variant === 'slim',
       [s.loading]: loading,
-      [s.disabled]: disabled,
+      [s.disabled]: disabled
     },
     className
   )
@@ -55,8 +56,9 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
       disabled={disabled}
       style={{
         width,
-        ...style,
+        ...style
       }}
+      onClick={onClick}
     >
       {children}
       {loading && (
