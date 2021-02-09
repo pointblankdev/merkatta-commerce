@@ -36,7 +36,6 @@ const ProductCard: FC<Props> = ({
     baseAmount: p.prices?.retailPrice?.value,
     currencyCode: p.prices?.price?.currencyCode!
   })
-  console.log("This is a image source",src);
   return (
     <Link href={`/product${p.path}`}>
       <a
