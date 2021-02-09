@@ -20,11 +20,6 @@ const ProductForm = ({ product: p }) => {
         defaultValue={p.name}
         onChange={(v) => (form.name = v)}
       />
-      <textarea
-        className="form-textarea mt-1 block w-full"
-        placeholder="Description of material"
-        defaultValue={p.description}
-      />
       <div className="flex justify-end">
         <div className="relative inline-block text-left">
           <div>
@@ -130,12 +125,11 @@ const ProductForm = ({ product: p }) => {
         <input
           type="checkbox"
           className="form-checkbox"
-          defaultChecked={
-            p.availability_description === 'Ships within 24 hours.'
-          }
-          onChange={() =>
-            (form.availability_description = 'Ships within 24 hours.')
-          }
+          defaultChecked={p.availability_description === '< 24 hours'}
+          onChange={() => {
+            form.availability_description = '< 24 hours'
+            form.description = 'Ships within 24 hours.'
+          }}
         />
         <span className="ml-2">Ships in 24 hours or less</span>
       </label>
