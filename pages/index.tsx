@@ -1,7 +1,5 @@
 import rangeMap from '@lib/range-map'
 import { Layout } from '@components/common'
-import { ProductCard } from '@components/product'
-import { Grid, Marquee, Hero } from '@components/ui'
 import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
@@ -76,7 +74,7 @@ export async function getStaticProps ({
 
 const nonNullable = (v: any) => v
 
-export default function Home ({
+export function Home ({
   featured,
   bestSelling,
   brands,
@@ -89,6 +87,7 @@ export default function Home ({
         categories={categories}
         brands={brands}
         newestProducts={newestProducts}
+        bestSelling={bestSelling}
       />
     </div>
   )
@@ -100,6 +99,6 @@ Home.Layout = Layout
  * This is temporary.
  * Make home the default export for local dev.
  */
-export function ComingSoon () {
+export default function ComingSoon () {
   return <Blog />
 }

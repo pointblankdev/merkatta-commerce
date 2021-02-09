@@ -1,17 +1,23 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import { Grid, Hero } from '@components/ui'
+import { Grid, Hero, Marquee } from '@components/ui'
 import { ProductCard } from '@components/product'
 import s from './HomeAllProductsGrid.module.css'
 import { getCategoryPath, getDesignerPath } from '@lib/search'
 
 interface Props {
+  bestSelling?: any
   categories?: any
   brands?: any
   newestProducts?: any
 }
 
-const Head: FC<Props> = ({ categories, brands, newestProducts }) => {
+const Head: FC<Props> = ({
+  categories,
+  brands,
+  newestProducts,
+  bestSelling
+}) => {
   return (
     <div className={s.root}>
       <div className={s.asideWrapper}>
@@ -46,24 +52,24 @@ const Head: FC<Props> = ({ categories, brands, newestProducts }) => {
           </ul>
         </div>
       </div>
-      {/* <Marquee>
-        {bestSelling.slice(0, 3).map(({ node }) => (
-          <ProductCard
-            key={node.path}
-            product={node}
-            variant="slim"
-            imgWidth={320}
-            imgHeight={320}
-            imgLayout="fixed"
-          />
-        ))}
-      </Marquee> */}
       <div className="flex flex-col w-full">
         <Hero
           headline="Welcome to Merkatta"
           description="
         The simplest wholesale packaging marketplace."
         />
+        <Marquee>
+          {bestSelling.slice(0, 3).map(({ node }) => (
+            <ProductCard
+              key={node.path}
+              product={node}
+              variant="slim"
+              imgWidth={320}
+              imgHeight={320}
+              imgLayout="fixed"
+            />
+          ))}
+        </Marquee>
         <div className="flex-1">
           <Grid layout="normal">
             {newestProducts.map(({ node }: any) => (
