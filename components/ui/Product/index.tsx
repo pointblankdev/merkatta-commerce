@@ -1,77 +1,13 @@
 import { useState } from 'react'
 import { Container } from '@components/ui'
-import ProductItem from './Product'
 import ProductForm, { form } from './Form'
 import { cloneDeep } from 'lodash'
+import ProductTable from './Table'
 
 const ProductEmpty = () => (
   <Container>
     <div className="my-6">You haven't added any products.</div>
   </Container>
-)
-
-const ProductHeader = () => (
-  <thead className="bg-gray-50">
-    <tr>
-      <th
-        scope="col"
-        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-      >
-        Item
-      </th>
-      <th
-        scope="col"
-        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-      >
-        Unit
-      </th>
-      <th
-        scope="col"
-        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-      >
-        SKU
-      </th>
-      <th
-        scope="col"
-        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-      >
-        Weight
-      </th>
-      <th
-        scope="col"
-        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-      >
-        Price
-      </th>
-      <th
-        scope="col"
-        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-      >
-        Ships in 24 hours
-      </th>
-      <th
-        scope="col"
-        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-      >
-        Min Order Size
-      </th>
-      <th
-        scope="col"
-        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-      >
-        Width Range
-      </th>
-      <th
-        scope="col"
-        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-      >
-        Samples Offered
-      </th>
-      <th scope="col" className="relative px-6 py-3">
-        <span className="sr-only">Edit</span>
-      </th>
-    </tr>
-  </thead>
 )
 
 const AddProductModal = ({ hide, closeModal }) => {
@@ -149,7 +85,7 @@ const AddProductModal = ({ hide, closeModal }) => {
 }
 
 const Products = (props) => {
-  const [products, setProducts] = useState(props.products || [])
+  const [products] = useState(props.products || [])
   const [hideProductModal, setHideProductModal] = useState(true)
 
   return (
@@ -163,18 +99,7 @@ const Products = (props) => {
         {products.length > 0
           ? (
           <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-              <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <ProductHeader />
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {products.map((product) => (
-                      <ProductItem key={product.id} product={product} />
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <ProductTable products={products} />
           </div>
             )
           : (
