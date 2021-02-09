@@ -1,16 +1,25 @@
 import { useState } from 'react'
 import { Input } from '@components/ui'
 import { proxy } from 'valtio'
+import _ from 'lodash'
 
 export const store: any = proxy({})
 
 const ProductForm = ({ product: p }) => {
-  const [unit, setUnit] = useState('')
+  const units = _.find(p.custom_fields, {
+    name: 'Units'
+  })
+  const [unit, setUnit] = useState(units?.value)
   const [showUnitDropdown, setShowUnitDropdown] = useState(false)
   const selectUnitDropdown = (unit) => {
     setUnit(unit)
+    store.units = unit
     setShowUnitDropdown(false)
   }
+
+  const trialRollsOffered = _.find(p.custom_fields, {
+    name: 'Trial Rolls Offered'
+  }) || { name: 'Trial Rolls Offered', value: 'false' }
 
   return (
     <div className="flex flex-col space-y-4 w-full my-6">
@@ -91,8 +100,9 @@ const ProductForm = ({ product: p }) => {
             step="0.01"
             placeholder="Price"
             defaultValue={p.price}
+            onChange={(v) => (store.price = v)}
           />
-          <div className="px-2">{`$ / ${unit}`}</div>
+          <div className="px-2">{`$ / ${unit || 'unit'}`}</div>
         </div>
         <div className="flex flex-row justify-between my-1">
           <Input
@@ -103,7 +113,7 @@ const ProductForm = ({ product: p }) => {
             defaultValue={p.order_quantity_minimum}
             onChange={(v) => (store.order_quantity_minimum = v)}
           />
-          <div className="px-2">{`${unit}`}</div>
+          <div className="px-2">{`${unit || 'unit'}`}</div>
         </div>
       </div>
       <Input
@@ -111,15 +121,19 @@ const ProductForm = ({ product: p }) => {
         type="number"
         step="1"
         placeholder="Max width to cut"
+        onChange={(v) => (store.width = v)}
       />
       <label className="flex items-center">
         <input
           type="checkbox"
           className="form-checkbox"
-          defaultChecked={p.availability_description === '< 24 hours'}
-          onChange={() => {
-            store.availability_description = '< 24 hours'
-            store.description = 'Ships within 24 hours.'
+          defaultChecked={Boolean(
+            p.availability_description === 'Ships within 24 hours'
+          )}
+          onChange={(e) => {
+            store.availability_description = e.target.checked
+              ? 'Ships within 24 hours'
+              : 'May take longer than 24 hours to ship'
           }}
         />
         <span className="ml-2">Ships in 24 hours or less</span>
@@ -128,8 +142,10 @@ const ProductForm = ({ product: p }) => {
         <input
           type="checkbox"
           className="form-checkbox"
-          defaultChecked={false}
-          onChange={() => {}}
+          defaultChecked={trialRollsOffered.value === 'true'}
+          onChange={(e) => {
+            store.trialRollsOffered = String(e.target.checked)
+          }}
         />
         <span className="ml-2">Trial rolls offered</span>
       </label>

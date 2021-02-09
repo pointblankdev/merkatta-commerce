@@ -11,7 +11,7 @@ export async function getServerSideProps (ctx) {
     const brandId = await getBrandIdFromSession(session)
     // Each vendor account is associated with a BigCommerce 'Brand'
     const { data, error } = await fetch(
-      `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products?brand_id=${brandId}`,
+      `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products?brand_id=${brandId}&include=custom_fields`,
       {
         headers: {
           'content-type': 'application/json',

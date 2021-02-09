@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Container } from '@components/ui'
 import ProductForm, { store } from './Form'
-import { cloneDeep } from 'lodash'
 import ProductTable from './Table'
+import { snapshot } from 'valtio'
 
 const ProductView = (props) => {
   const [products] = useState(props.products || [])
@@ -45,10 +45,29 @@ const ProductEmpty = () => (
 )
 
 const AddProductModal = ({ hide, closeModal }) => {
-  const addProduct = async (p) => {
-    await fetch('/api/vendor/product', {
+  const addProduct = async () => {
+    const product = snapshot(store)
+    const { data } = await fetch('/api/vendor/product', {
       method: 'post',
-      body: JSON.stringify(p)
+      body: JSON.stringify({
+        name: product.name,
+        order_quantity_minimum: product.order_quantity_minimum,
+        price: product.price
+      })
+    }).then((r) => r.json())
+    await fetch(`/api/vendor/custom-field?id=${data.id}`, {
+      method: 'post',
+      body: JSON.stringify({
+        name: 'Trial Rolls Offered',
+        value: product.trialRollsOffered
+      })
+    }).then((r) => r.json())
+    await fetch(`/api/vendor/custom-field?id=${data.id}`, {
+      method: 'post',
+      body: JSON.stringify({
+        name: 'Units',
+        value: product.units
+      })
     }).then((r) => r.json())
     closeModal(true)
   }
@@ -75,7 +94,7 @@ const AddProductModal = ({ hide, closeModal }) => {
           <form
             onSubmit={(e: any) => {
               e.preventDefault()
-              addProduct(cloneDeep(store))
+              addProduct()
             }}
           >
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">

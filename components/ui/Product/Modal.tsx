@@ -1,12 +1,59 @@
-import { cloneDeep, merge } from 'lodash'
+import _ from 'lodash'
+import { snapshot } from 'valtio'
 import ProductForm, { store } from './Form'
 
 const EditProductModal = ({ product, hide, closeModal }) => {
-  const editProduct = async (p) => {
+  const editProduct = async () => {
     await fetch('/api/vendor/product', {
       method: 'post',
-      body: JSON.stringify(p)
+      body: JSON.stringify({ id: product.id, ...snapshot(store) })
     }).then((r) => r.json())
+    const trialRollsOffered = _.find(product.custom_fields, {
+      name: 'Trial Rolls Offered'
+    })
+    if (!_.isUndefined(trialRollsOffered)) {
+      await fetch(
+        `/api/vendor/custom-field?id=${product.id}&custom_field_id=${trialRollsOffered.id}`,
+        {
+          method: 'put',
+          body: JSON.stringify({
+            name: 'Trial Rolls Offered',
+            value: snapshot(store).trialRollsOffered
+          })
+        }
+      ).then((r) => r.json())
+    } else {
+      await fetch(`/api/vendor/custom-field?id=${product.id}`, {
+        method: 'post',
+        body: JSON.stringify({
+          name: 'Trial Rolls Offered',
+          value: snapshot(store).trialRollsOffered
+        })
+      }).then((r) => r.json())
+    }
+    const units = _.find(product.custom_fields, {
+      name: 'Units'
+    })
+    if (!_.isUndefined(units)) {
+      await fetch(
+        `/api/vendor/custom-field?id=${product.id}&custom_field_id=${units.id}`,
+        {
+          method: 'put',
+          body: JSON.stringify({
+            name: 'Units',
+            value: snapshot(store).units
+          })
+        }
+      ).then((r) => r.json())
+    } else {
+      await fetch(`/api/vendor/custom-field?id=${product.id}`, {
+        method: 'post',
+        body: JSON.stringify({
+          name: 'Units',
+          value: snapshot(store).units
+        })
+      }).then((r) => r.json())
+    }
     closeModal(true)
   }
 
@@ -32,9 +79,7 @@ const EditProductModal = ({ product, hide, closeModal }) => {
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              const _product = merge(cloneDeep(product), store)
-              console.log(_product)
-              editProduct(_product)
+              editProduct()
             }}
           >
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">

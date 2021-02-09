@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { useState } from 'react'
 import EditProductModal from './Modal'
 
@@ -22,6 +23,14 @@ export default ProductTable
 
 const ProductItem = ({ product }) => {
   const [hideProductModal, setHideProductModal] = useState(true)
+  const trialRollsOffered =
+    _.find(product.custom_fields, {
+      name: 'Trial Rolls Offered'
+    })?.value === 'true'
+      ? '✔️'
+      : ''
+  const shipsIn24Hours =
+    product.availability_description === 'Ships within 24 hours' ? '✔️' : ''
   return (
     <>
       <EditProductModal
@@ -62,16 +71,16 @@ const ProductItem = ({ product }) => {
           {`$${product.price}`}
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          {product.shipsWithinDay}
+          {shipsIn24Hours}
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          {product.minOrderSize}
+          {product.order_quantity_minimum}
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          {product.maxWidth}
+          {product.width ? `${product.width}"` : ''}
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          {product.samples}
+          {trialRollsOffered}
         </td>
         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
           <a
