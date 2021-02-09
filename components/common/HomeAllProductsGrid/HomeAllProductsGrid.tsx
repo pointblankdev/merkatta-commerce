@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import { Grid } from '@components/ui'
+import { Grid, Hero } from '@components/ui'
 import { ProductCard } from '@components/product'
 import s from './HomeAllProductsGrid.module.css'
 import { getCategoryPath, getDesignerPath } from '@lib/search'
@@ -33,7 +33,7 @@ const Head: FC<Props> = ({ categories, brands, newestProducts }) => {
           <ul className="">
             <li className="py-1 text-base font-bold tracking-wide">
               <Link href={getDesignerPath('')}>
-                <a>All Designers</a>
+                <a>All Vendors</a>
               </Link>
             </li>
             {brands.flatMap(({ node }: any) => (
@@ -46,18 +46,37 @@ const Head: FC<Props> = ({ categories, brands, newestProducts }) => {
           </ul>
         </div>
       </div>
-      <div className="flex-1">
-        <Grid layout="normal">
-          {newestProducts.map(({ node }: any) => (
-            <ProductCard
-              key={node.path}
-              product={node}
-              variant="simple"
-              imgWidth={480}
-              imgHeight={480}
-            />
-          ))}
-        </Grid>
+      {/* <Marquee>
+        {bestSelling.slice(0, 3).map(({ node }) => (
+          <ProductCard
+            key={node.path}
+            product={node}
+            variant="slim"
+            imgWidth={320}
+            imgHeight={320}
+            imgLayout="fixed"
+          />
+        ))}
+      </Marquee> */}
+      <div className="flex flex-col w-full">
+        <Hero
+          headline="Welcome to Merkatta"
+          description="
+        The simplest wholesale packaging marketplace."
+        />
+        <div className="flex-1">
+          <Grid layout="normal">
+            {newestProducts.map(({ node }: any) => (
+              <ProductCard
+                key={node.path}
+                product={node}
+                variant="simple"
+                imgWidth={480}
+                imgHeight={480}
+              />
+            ))}
+          </Grid>
+        </div>
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 .root {
-  @apply py-12 flex flex-col w-full px-6;
+  @apply py-2 flex flex-col w-full px-6;
 
   @screen md {
     @apply flex-row;

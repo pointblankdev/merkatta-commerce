@@ -76,7 +76,7 @@ export async function getStaticProps ({
 
 const nonNullable = (v: any) => v
 
-export function Home ({
+export default function Home ({
   featured,
   bestSelling,
   brands,
@@ -85,57 +85,6 @@ export function Home ({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
-      <Grid>
-        {featured.slice(0, 3).map(({ node }, i) => (
-          <ProductCard
-            key={node.path}
-            product={node}
-            imgWidth={i === 0 ? 1080 : 540}
-            imgHeight={i === 0 ? 1080 : 540}
-            imgPriority
-            imgLoading="eager"
-          />
-        ))}
-      </Grid>
-      <Marquee variant="secondary">
-        {bestSelling.slice(3, 6).map(({ node }) => (
-          <ProductCard
-            key={node.path}
-            product={node}
-            variant="slim"
-            imgWidth={320}
-            imgHeight={320}
-            imgLayout="fixed"
-          />
-        ))}
-      </Marquee>
-      <Hero
-        headline="Welcome to Merkatta"
-        description="
-        The simplest wholesale packaging marketplace."
-      />
-      <Grid layout="B">
-        {featured.slice(3, 6).map(({ node }, i) => (
-          <ProductCard
-            key={node.path}
-            product={node}
-            imgWidth={i === 1 ? 1080 : 540}
-            imgHeight={i === 1 ? 1080 : 540}
-          />
-        ))}
-      </Grid>
-      <Marquee>
-        {bestSelling.slice(0, 3).map(({ node }) => (
-          <ProductCard
-            key={node.path}
-            product={node}
-            variant="slim"
-            imgWidth={320}
-            imgHeight={320}
-            imgLayout="fixed"
-          />
-        ))}
-      </Marquee>
       <HomeAllProductsGrid
         categories={categories}
         brands={brands}
@@ -151,6 +100,6 @@ Home.Layout = Layout
  * This is temporary.
  * Make home the default export for local dev.
  */
-export default function ComingSoon () {
+export function ComingSoon () {
   return <Blog />
 }
