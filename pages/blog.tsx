@@ -59,7 +59,7 @@ export default function Blog () {
           <img src="/graphic.png" alt="Graphic" />
         </div> */}
         {/** Replace by HTML Content */}
-        <div className="text-lg leading-7 font-medium py-6 text-justify max-w-6xl mx-auto">
+        <div className="text-lg leading-7 font-fine py-6 text-justify max-w-6xl mx-auto">
           <p className="py-6">
             We're still getting things set up here, so stay tuned from something
             great!
