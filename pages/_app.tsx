@@ -12,7 +12,7 @@ import { useApollo } from '@lib/apollo'
 
 const Noop: FC = ({ children }) => <>{children}</>
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp ({ Component, pageProps }: AppProps) {
   const Layout = (Component as any).Layout || Noop
   const apolloClient = useApollo(pageProps.initialApolloState)
 

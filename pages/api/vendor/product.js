@@ -47,7 +47,7 @@ export default async function product (req, res) {
    */
   if (req.method === 'GET') {
     const response = await fetch(
-      `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products/${req.query.id}`,
+      `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products/${req.query.id}&include=custom_fields`,
       {
         method: 'GET',
         mode: 'no-cors',

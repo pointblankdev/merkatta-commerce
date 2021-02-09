@@ -5,7 +5,7 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-var request = require('request')
+const request = require('request')
 
 const options = {
   method: 'GET',
@@ -13,9 +13,9 @@ const options = {
   headers: {
     'content-type': 'application/json',
     accept: 'application/json',
-    'x-auth-token': process.env.ACCESS_TOKEN,
+    'x-auth-token': process.env.ACCESS_TOKEN
   },
-  json: true,
+  json: true
 }
 
 const resolvers = {
@@ -28,11 +28,10 @@ const resolvers = {
         })
       })
       return { statusCode: 200, items: data }
-    },
+    }
   },
   Mutation: {
     createOrUpdateProduct: async (event) => {
-      console.log(event)
       const data = await new Promise((resolve, reject) => {
         options.body = {
           name: 'Create product with image ' + Math.random() * 100,
@@ -43,19 +42,18 @@ const resolvers = {
           images: [
             {
               image_url:
-                'https://upload.wikimedia.org/wikipedia/commons/7/7f/Anglel_Bless_Legendary_Hills_1_m%C4%9Bs%C3%ADc_st%C3%A1%C5%99%C3%AD.jpg',
-            },
-          ],
+                'https://upload.wikimedia.org/wikipedia/commons/7/7f/Anglel_Bless_Legendary_Hills_1_m%C4%9Bs%C3%ADc_st%C3%A1%C5%99%C3%AD.jpg'
+            }
+          ]
         }
         request(options, (error, response, body) => {
           if (error) reject(error)
           resolve(body)
         })
       })
-      console.log(data)
       return { statusCode: 200 }
-    },
-  },
+    }
+  }
 }
 
 exports.handler = async (event) => {

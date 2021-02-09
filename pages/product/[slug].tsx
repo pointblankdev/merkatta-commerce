@@ -31,9 +31,19 @@ export async function getStaticProps ({
   if (!product) {
     throw new Error(`Product with slug '${params!.slug}' not found`)
   }
+  const { data } = await fetch(
+    `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products/${product.entityId}?include=custom_fields`,
+    {
+      headers: {
+        'content-type': 'application/json',
+        accept: 'application/json',
+        'x-auth-token': process.env.ACCESS_TOKEN
+      }
+    }
+  ).then((r) => r.json())
 
   return {
-    props: { pages, product },
+    props: { pages, product, data },
     revalidate: 200
   }
 }
@@ -56,7 +66,8 @@ export async function getStaticPaths ({ locales }: GetStaticPathsContext) {
 }
 
 export default function Slug ({
-  product
+  product,
+  data
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
 
@@ -65,7 +76,7 @@ export default function Slug ({
     <h1>Loading...</h1>
       )
     : (
-    <ProductView product={product} />
+    <ProductView product={product} data={data} />
       )
 }
 

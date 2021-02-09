@@ -17,14 +17,16 @@ import {
   SelectedOptions
 } from '../helpers'
 import WishlistButton from '@components/wishlist/WishlistButton'
+import _ from 'lodash'
 
 interface Props {
   className?: string
   children?: any
   product: ProductNode
+  data: any
 }
 
-const ProductView: FC<Props> = ({ product }) => {
+const ProductView: FC<Props> = ({ product, data }) => {
   const addItem = useAddItem()
   const { price } = usePrice({
     amount: product.prices?.price?.value,
@@ -136,9 +138,7 @@ const ProductView: FC<Props> = ({ product }) => {
               </div>
             ))}
 
-            <div className="pb-14 break-words w-full max-w-xl">
-              <Text html={product.description} />
-            </div>
+            <ProductItem product={data} />
           </section>
           <div>
             <Button
@@ -156,11 +156,11 @@ const ProductView: FC<Props> = ({ product }) => {
           </div>
         </div>
 
-        <WishlistButton
+        {/* <WishlistButton
           className={s.wishlistButton}
           productId={product.entityId}
           variant={product.variants.edges?.[0]!}
-        />
+        /> */}
       </div>
       <ContactSellerModal
         show={contactSellerModalVisible}
@@ -171,6 +171,44 @@ const ProductView: FC<Props> = ({ product }) => {
 }
 
 export default ProductView
+
+const ProductItem = ({ product }) => {
+  const units = _.find(product.custom_fields, {
+    name: 'Units'
+  })?.value
+  const trialRollsOffered =
+    _.find(product.custom_fields, {
+      name: 'Trial Rolls Offered'
+    })?.value === 'true'
+      ? '✔️'
+      : ''
+  const shipsIn24Hours =
+    product.availability_description === 'Ships within 24 hours' ? '✔️' : ''
+  return (
+    <section>
+      <div className="flex flex-col">
+        <div className="px-6 py-4 whitespace-nowrap">
+          <div className="text-xl text-gray-900">{product.sku}</div>
+        </div>
+        <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          {`Price per Unit: $${product.price} / ${units}`}
+        </div>
+        <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          Ships in 24 Hours: {shipsIn24Hours}
+        </div>
+        <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          Minimum Order Size: {product.order_quantity_minimum}&nbsp;{units}
+        </div>
+        <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          Maximum width cut: {product.width ? `${product.width}"` : ''}
+        </div>
+        <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          Trial Rolls Offered: {trialRollsOffered}
+        </div>
+      </div>
+    </section>
+  )
+}
 
 const ContactSellerModal = ({ show, onClose }) => {
   if (!show) return null
