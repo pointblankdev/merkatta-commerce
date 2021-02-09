@@ -1,18 +1,26 @@
 import { useState } from 'react'
 import { Input } from '@components/ui'
+import { proxy } from 'valtio'
 
-const ProductForm = ({ product: p, onSubmit }) => {
-  const [name, setName] = useState(p.name)
+export const form: any = proxy({})
+
+const ProductForm = ({ product: p }) => {
   const [unit, setUnit] = useState('')
   const [showUnitDropdown, setShowUnitDropdown] = useState(false)
   const selectUnitDropdown = (unit) => {
     setUnit(unit)
     setShowUnitDropdown(false)
   }
+
   return (
-    <form onSubmit={() => onSubmit({ name })}>
-      <div className="flex flex-col space-y-4 w-full my-6">
-        <Input placeholder="Name" defaultValue={p.name} onChange={setName} />
+    <div className="flex flex-col space-y-4 w-full my-6">
+      <Input
+        type="text"
+        placeholder="Product name or identifier"
+        defaultValue={p.name}
+        onChange={(v) => (form.name = v)}
+      />
+      <div className="flex justify-end">
         <div className="relative inline-block text-left">
           <div>
             <button
@@ -74,35 +82,67 @@ const ProductForm = ({ product: p, onSubmit }) => {
             </div>
           )}
         </div>
-        <textarea
-          className="form-textarea mt-1 block w-full"
-          placeholder="Description"
-          defaultValue={p.description}
-        />
-        <Input
-          type="number"
-          step="0.01"
-          placeholder="Price"
-          defaultValue={p.price}
-        />
-        <Input
-          type="number"
-          step="0.01"
-          placeholder="Weight"
-          defaultValue={p.weight}
-        />
-        <Input type="number" step="0.01" placeholder="Minimum order size" />
-        <Input type="number" step="0.01" placeholder="Width Range" />
-        <label className="flex items-center">
-          <input type="checkbox" className="form-checkbox" />
-          <span className="ml-2">Ships in 24 hours or less</span>
-        </label>
-        <label className="flex items-center">
-          <input type="checkbox" className="form-checkbox" />
-          <span className="ml-2">Trial rolls offered</span>
-        </label>
       </div>
-    </form>
+      <div className="flex flex-col">
+        <div className="flex flex-row justify-between my-1">
+          <Input
+            label="Price per unit"
+            type="number"
+            step="0.01"
+            placeholder="Price"
+            defaultValue={p.price}
+          />
+          <div className="px-2">{`$ / ${unit}`}</div>
+        </div>
+        <div className="flex flex-row justify-between my-1">
+          <Input
+            label="Weight per unit"
+            type="number"
+            step="0.01"
+            placeholder="Weight"
+            defaultValue={p.weight}
+          />
+          <div className="px-2">{`${unit}`}</div>
+        </div>
+        <div className="flex flex-row justify-between my-1">
+          <Input
+            label="Minimum order size"
+            type="number"
+            step="0.01"
+            placeholder="Minimum order size"
+            defaultValue={p.order_quantity_minimum}
+            onChange={(v) => (form.order_quantity_minimum = v)}
+          />
+          <div className="px-2">{`${unit}`}</div>
+        </div>
+      </div>
+      <Input
+        label="Width range (inches)"
+        type="text"
+        placeholder="Width range"
+      />
+      <label className="flex items-center">
+        <input
+          type="checkbox"
+          className="form-checkbox"
+          defaultChecked={p.availability_description === '< 24 hours'}
+          onChange={() => {
+            form.availability_description = '< 24 hours'
+            form.description = 'Ships within 24 hours.'
+          }}
+        />
+        <span className="ml-2">Ships in 24 hours or less</span>
+      </label>
+      <label className="flex items-center">
+        <input
+          type="checkbox"
+          className="form-checkbox"
+          defaultChecked={false}
+          onChange={() => {}}
+        />
+        <span className="ml-2">Trial rolls offered</span>
+      </label>
+    </div>
   )
 }
 

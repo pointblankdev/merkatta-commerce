@@ -1,6 +1,6 @@
 import { getBrandIdFromSession, getLoginSession } from '@lib/vendor/auth'
 
-export default async function products(req, res) {
+export default async function products (req, res) {
   const session = await getLoginSession(req)
   const brandId = await getBrandIdFromSession(session)
   // Each vendor account is associated with a BigCommerce 'Brand'
@@ -10,8 +10,8 @@ export default async function products(req, res) {
       headers: {
         'content-type': 'application/json',
         accept: 'application/json',
-        'x-auth-token': process.env.ACCESS_TOKEN,
-      },
+        'x-auth-token': process.env.ACCESS_TOKEN
+      }
     }
   ).then((r) => r.json())
   res.statusCode = response.status || 200

@@ -4,11 +4,12 @@ import React, { InputHTMLAttributes } from 'react'
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string
+  label?: string
   onChange?: (...args: any[]) => any
 }
 
 const Input: React.FC<Props> = (props) => {
-  const { className, children, onChange, ...rest } = props
+  const { className, children, onChange, label, ...rest } = props
 
   const rootClassName = cn(s.root, {}, className)
 
@@ -21,6 +22,7 @@ const Input: React.FC<Props> = (props) => {
 
   return (
     <label>
+      <div>{label}</div>
       <input
         className={rootClassName}
         onChange={handleOnChange}

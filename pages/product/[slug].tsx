@@ -1,7 +1,7 @@
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
-  InferGetStaticPropsType,
+  InferGetStaticPropsType
 } from 'next'
 import { useRouter } from 'next/router'
 import { Layout } from '@components/common'
@@ -14,10 +14,10 @@ import getProduct from '@bigcommerce/storefront-data-hooks/api/operations/get-pr
 import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import getAllProductPaths from '@bigcommerce/storefront-data-hooks/api/operations/get-all-product-paths'
 
-export async function getStaticProps({
+export async function getStaticProps ({
   params,
   locale,
-  preview,
+  preview
 }: GetStaticPropsContext<{ slug: string }>) {
   const config = getConfig({ locale })
 
@@ -25,7 +25,7 @@ export async function getStaticProps({
   const { product } = await getProduct({
     variables: { slug: params!.slug },
     config,
-    preview,
+    preview
   })
 
   if (!product) {
@@ -34,37 +34,39 @@ export async function getStaticProps({
 
   return {
     props: { pages, product },
-    revalidate: 200,
+    revalidate: 200
   }
 }
 
-export async function getStaticPaths({ locales }: GetStaticPathsContext) {
+export async function getStaticPaths ({ locales }: GetStaticPathsContext) {
   const { products } = await getAllProductPaths()
 
   return {
     paths: locales
       ? locales.reduce<string[]>((arr, locale) => {
-          // Add a product path for every locale
-          products.forEach((product) => {
-            arr.push(`/${locale}/product${product.node.path}`)
-          })
-          return arr
-        }, [])
+        // Add a product path for every locale
+        products.forEach((product) => {
+          arr.push(`/${locale}/product${product.node.path}`)
+        })
+        return arr
+      }, [])
       : products.map((product) => `/product${product.node.path}`),
-    fallback: 'blocking',
+    fallback: 'blocking'
   }
 }
 
-export default function Slug({
-  product,
+export default function Slug ({
+  product
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
 
-  return router.isFallback ? (
-    <h1>Loading...</h1> // TODO (BC) Add Skeleton Views
-  ) : (
+  return router.isFallback
+    ? (
+    <h1>Loading...</h1>
+      )
+    : (
     <ProductView product={product} />
-  )
+      )
 }
 
 Slug.Layout = Layout

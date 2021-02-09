@@ -20,7 +20,7 @@ export default function Signin () {
     if (errorMsg) setErrorMsg('')
 
     const body = {
-      email,
+      email
     }
 
     // TODO: Centralize into consumer
@@ -50,14 +50,18 @@ export default function Signin () {
 
   return (
     <Container>
-      <div className="grid justify-center h-screen content-center">
-        <div className="justify-self-center">
+      <div className="grid justify-center content-center">
+        <div className="justify-self-center lg:p-10 mt-20">
           <form onSubmit={handleSubmit}>
             <div className="flex justify-center pb-12">
               <LogoFull />
             </div>
             <div className="flex flex-col space-y-4 w-full">
-              <Input name="email" placeholder="email" onChange={setEmail} />
+              <Input
+                name="email"
+                placeholder="Email address"
+                onChange={setEmail}
+              />
               <Button type="submit" variant="slim" disabled={email === ''}>
                 Sign in with magic link
               </Button>
