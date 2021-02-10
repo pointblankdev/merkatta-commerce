@@ -14,17 +14,10 @@ const Template: Story<ButtonProps> = (args) => <Button {...args}>Button</Button>
 
 export const Slim = Template.bind({})
 Slim.args = {
-  variant: 'slim',
-  type: 'submit'
-}
-
-export const Reset = Template.bind({})
-Reset.args = {
-  type: 'reset'
+  variant: 'slim'
 }
 
 export const Flat = Template.bind({})
 Flat.args = {
-  variant: 'flat',
-  type: 'button'
+  variant: 'flat'
 }
