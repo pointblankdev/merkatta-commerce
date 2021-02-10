@@ -4,7 +4,6 @@ import { Grid, Hero, Marquee } from '@components/ui'
 import { ProductCard } from '@components/product'
 import s from './HomeAllProductsGrid.module.css'
 import { getCategoryPath, getDesignerPath } from '@lib/search'
-import useConfig from '@lib/hooks/useConfig'
 
 interface Props {
   bestSelling?: any
@@ -19,9 +18,6 @@ const Head: FC<Props> = ({
   newestProducts,
   bestSelling
 }) => {
-  const config = useConfig()
-  console.log('CONFIG: ', config)
-
   return (
     <div className={s.root}>
       <div className={s.asideWrapper}>
