@@ -67,7 +67,7 @@ const Head: FC<Props> = ({
             <ProductCard
               key={node.path}
               product={node}
-              variant="slim"
+              variant="label"
               imgWidth={320}
               imgHeight={320}
               imgLayout="fixed"
