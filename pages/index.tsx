@@ -74,7 +74,7 @@ export async function getStaticProps ({
 
 const nonNullable = (v: any) => v
 
-export function Home ({
+export default function Home ({
   featured,
   bestSelling,
   brands,
@@ -99,6 +99,6 @@ Home.Layout = Layout
  * This is temporary.
  * Make home the default export for local dev.
  */
-export default function ComingSoon () {
+export function ComingSoon () {
   return <Blog />
 }
