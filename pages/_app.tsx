@@ -9,15 +9,12 @@ import { Head } from '@components/common'
 
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '@lib/apollo'
-import useConfig from '@lib/hooks/useConfig'
 
 const Noop: FC = ({ children }) => <>{children}</>
 
 export default function MyApp ({ Component, pageProps }: AppProps) {
   const Layout = (Component as any).Layout || Noop
   const apolloClient = useApollo(pageProps.initialApolloState)
-  const config = useConfig()
-  console.log('CONFIG: ', config)
 
   return (
     <>
