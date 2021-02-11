@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
-import { Container } from '@components/ui'
-import { RightArrow } from '@components/icons'
+import Container from '../Container'
+import { RightArrow } from '../../icons'
 import s from './Hero.module.css'
 import Link from 'next/link'
-interface Props {
+export interface HeroProps {
   className?: string
   headline: string
   description: string
 }
 
-const Hero: FC<Props> = ({ headline, description }) => {
+const Hero: FC<HeroProps> = ({ headline, description }) => {
   return (
     <div className="bg-secondary">
       <Container>
