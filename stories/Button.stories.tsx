@@ -13,6 +13,7 @@ const disabled = { control: { disable: true } }
 
 export const Slim = Template.bind({})
 Slim.argTypes = {
+  href: disabled,
   className: disabled,
   Component: disabled,
   onClick: disabled
@@ -23,6 +24,7 @@ Slim.args = {
 
 export const Flat = Template.bind({})
 Flat.argTypes = {
+  href: disabled,
   className: disabled,
   Component: disabled,
   onClick: disabled

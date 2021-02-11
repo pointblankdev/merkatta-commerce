@@ -11,6 +11,7 @@ import s from './Button.module.css'
 import LoadingDots from '../LoadingDots'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  href?: string
   className?: string
   variant?: 'flat' | 'slim'
   active?: boolean
