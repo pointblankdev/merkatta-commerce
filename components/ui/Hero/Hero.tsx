@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import Container from '../Container'
 import { RightArrow } from '../../icons'
 import s from './Hero.module.css'
 import Link from 'next/link'
+
 export interface HeroProps {
-  className?: string
   headline: string
   description: string
 }

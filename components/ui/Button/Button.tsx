@@ -1,5 +1,6 @@
 import cn from 'classnames'
-import React, {
+import {
+  FC,
   forwardRef,
   ButtonHTMLAttributes,
   JSXElementConstructor,
@@ -10,7 +11,6 @@ import s from './Button.module.css'
 import LoadingDots from '../LoadingDots'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  href?: string
   className?: string
   variant?: 'flat' | 'slim'
   active?: boolean
@@ -22,7 +22,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: any
 }
 
-const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
+const Button: FC<ButtonProps> = forwardRef((props, buttonRef) => {
   const {
     className,
     variant = 'flat',
