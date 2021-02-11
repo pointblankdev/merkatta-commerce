@@ -94,7 +94,7 @@ const ProductCard: FC<Props> = ({
         </div>
       </>
     ),
-    label: <div>This is a label</div>
+    label: <div className={s.productTitle}></div>
   }
   return (
     <Link href={`/product${p.path}`}>
