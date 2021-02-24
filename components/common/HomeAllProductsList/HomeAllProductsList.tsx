@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import { Grid, Hero, Marquee } from '@components/ui'
-import { ProductCard } from '@components/product'
-import s from './HomeAllProductsGrid.module.css'
+import { Hero, Marquee } from '@components/ui'
+import { ProductCard, ProductList } from '@components/product'
+import s from './HomeAllProductsList.module.css'
 import { getCategoryPath, getDesignerPath } from '@lib/search'
 
 interface Props {
@@ -71,17 +71,15 @@ const Head: FC<Props> = ({
           ))}
         </Marquee>
         <div className="flex-1">
-          <Grid layout="normal">
-            {newestProducts.map(({ node }: any) => (
-              <ProductCard
-                key={node.path}
-                product={node}
-                variant="label"
-                imgWidth={480}
-                imgHeight={80}
-              />
-            ))}
-          </Grid>
+          {newestProducts.map(({ node }: any) => (
+            <ProductList
+              key={node.path}
+              product={node}
+              variant="label"
+              imgWidth={480}
+              imgHeight={80}
+            />
+          ))}
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
-import { getBrandIdFromSession, getLoginSession } from '@lib/vendor/auth'
+import { getLoginSession } from '@lib/auth/session'
+import { getBrandIdFromSession } from '@lib/auth/utils'
 
 export default async function products (req, res) {
   const session = await getLoginSession(req)

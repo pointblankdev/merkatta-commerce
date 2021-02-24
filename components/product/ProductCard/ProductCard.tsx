@@ -10,7 +10,7 @@ import WishlistButton from '@components/wishlist/WishlistButton'
 interface Props {
   className?: string
   product: ProductNode
-  variant?: 'slim' | 'simple' | 'label'
+  variant?: 'slim' | 'simple' | 'label' | 'tag'
   imgWidth: number | string
   imgHeight: number | string
   imgLayout?: 'fixed' | 'intrinsic' | 'responsive' | undefined
@@ -94,7 +94,24 @@ const ProductCard: FC<Props> = ({
         </div>
       </>
     ),
-    label: <div className={s.productTitle}></div>
+    label: (
+      <>
+        <div className="box-border w-full z-20 absolute">
+          <div className="absolute top-0 left-0 pr-16 max-w-full">
+            <h3 className={s.productTitle}>
+              <span>{p.name}</span>
+            </h3>
+            <span className={s.productPrice}>{price}</span>
+          </div>
+          <WishlistButton
+            className={s.wishlistButton}
+            productId={p.entityId}
+            variant={p.variants.edges?.[0]!}
+          />
+        </div>
+      </>
+    ),
+    tag: <div className={s.productTitle}></div>
   }
   return (
     <Link href={`/product${p.path}`}>

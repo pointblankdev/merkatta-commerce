@@ -13,7 +13,7 @@ const Grid: FC<Props> = ({
   className,
   layout = 'A',
   children,
-  variant = 'default',
+  variant = 'default'
 }) => {
   const rootClassName = cn(
     s.root,
@@ -24,7 +24,7 @@ const Grid: FC<Props> = ({
       [s.layoutD]: layout === 'D',
       [s.layoutNormal]: layout === 'normal',
       [s.default]: variant === 'default',
-      [s.filled]: variant === 'filled',
+      [s.filled]: variant === 'filled'
     },
     className
   )

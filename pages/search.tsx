@@ -7,8 +7,8 @@ import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-a
 import getSiteInfo from '@bigcommerce/storefront-data-hooks/api/operations/get-site-info'
 import useSearch from '@bigcommerce/storefront-data-hooks/products/use-search'
 import { Layout } from '@components/common'
-import { ProductCard } from '@components/product'
-import { Container, Grid, Skeleton } from '@components/ui'
+import { ProductList } from '@components/product'
+import { Container, Skeleton } from '@components/ui'
 
 import rangeMap from '@lib/range-map'
 import getSlug from '@lib/get-slug'
@@ -16,19 +16,19 @@ import {
   filterQuery,
   getCategoryPath,
   getDesignerPath,
-  useSearchMeta,
+  useSearchMeta
 } from '@lib/search'
 
-export async function getStaticProps({
+export async function getStaticProps ({
   preview,
-  locale,
+  locale
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ config, preview })
   const { categories, brands } = await getSiteInfo({ config, preview })
 
   return {
-    props: { pages, categories, brands },
+    props: { pages, categories, brands }
   }
 }
 
@@ -36,12 +36,12 @@ const SORT = Object.entries({
   'latest-desc': 'Latest arrivals',
   'trending-desc': 'Trending',
   'price-asc': 'Price: Low to high',
-  'price-desc': 'Price: High to low',
+  'price-desc': 'Price: High to low'
 })
 
-export default function Search({
+export default function Search ({
   categories,
-  brands,
+  brands
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
   const { asPath } = router
@@ -63,7 +63,7 @@ export default function Search({
     search: typeof q === 'string' ? q : '',
     categoryId: activeCategory?.entityId,
     brandId: activeBrand?.entityId,
-    sort: typeof sort === 'string' ? sort : '',
+    sort: typeof sort === 'string' ? sort : ''
   })
 
   return (
@@ -80,13 +80,13 @@ export default function Search({
               <li
                 key={cat.path}
                 className={cn('py-1 text-accents-8', {
-                  underline: activeCategory?.entityId === cat.entityId,
+                  underline: activeCategory?.entityId === cat.entityId
                 })}
               >
                 <Link
                   href={{
                     pathname: getCategoryPath(cat.path, brand),
-                    query,
+                    query
                   }}
                 >
                   <a>{cat.name}</a>
@@ -97,20 +97,20 @@ export default function Search({
           <ul>
             <li className="py-1 text-base font-bold tracking-wide">
               <Link href={{ pathname: getDesignerPath('', category), query }}>
-                <a>All Designers</a>
+                <a>All Vendors</a>
               </Link>
             </li>
             {brands.flatMap(({ node }) => (
               <li
                 key={node.path}
                 className={cn('py-1 text-accents-8', {
-                  underline: activeBrand?.entityId === node.entityId,
+                  underline: activeBrand?.entityId === node.entityId
                 })}
               >
                 <Link
                   href={{
                     pathname: getDesignerPath(node.path, category),
-                    query,
+                    query
                   }}
                 >
                   <a>{node.name}</a>
@@ -122,12 +122,13 @@ export default function Search({
         <div className="col-span-8">
           {(q || activeCategory || activeBrand) && (
             <div className="mb-12 transition ease-in duration-75">
-              {data ? (
+              {data
+                ? (
                 <>
                   <span
                     className={cn('animated', {
                       fadeIn: data.found,
-                      hidden: !data.found,
+                      hidden: !data.found
                     })}
                   >
                     Showing {data.products.length} results{' '}
@@ -140,46 +141,52 @@ export default function Search({
                   <span
                     className={cn('animated', {
                       fadeIn: !data.found,
-                      hidden: data.found,
+                      hidden: data.found
                     })}
                   >
-                    {q ? (
+                    {q
+                      ? (
                       <>
                         There are no products that match "<strong>{q}</strong>"
                       </>
-                    ) : (
+                        )
+                      : (
                       <>
                         There are no products that match the selected category &
                         designer
                       </>
-                    )}
+                        )}
                   </span>
                 </>
-              ) : q ? (
+                  )
+                : q
+                  ? (
                 <>
                   Searching for: "<strong>{q}</strong>"
                 </>
-              ) : (
+                    )
+                  : (
                 <>Searching...</>
-              )}
+                    )}
             </div>
           )}
 
-          {data ? (
-            <Grid layout="normal">
-              {data.products.map(({ node }) => (
-                <ProductCard
-                  variant="simple"
+          {data
+            ? (
+            <div className="flex-1">
+              {data.products.map(({ node }: any) => (
+                <ProductList
                   key={node.path}
-                  className="animated fadeIn"
                   product={node}
+                  variant="label"
                   imgWidth={480}
-                  imgHeight={480}
+                  imgHeight={80}
                 />
               ))}
-            </Grid>
-          ) : (
-            <Grid layout="normal">
+            </div>
+              )
+            : (
+            <div className="flex-1">
               {rangeMap(12, (i) => (
                 <Skeleton
                   key={i}
@@ -187,15 +194,15 @@ export default function Search({
                   height={325}
                 />
               ))}
-            </Grid>
-          )}
+            </div>
+              )}
         </div>
         <div className="col-span-2">
           <ul>
             <li className="py-1 text-base font-bold tracking-wide">Sort</li>
             <li
               className={cn('py-1 text-accents-8', {
-                underline: !sort,
+                underline: !sort
               })}
             >
               <Link href={{ pathname, query: filterQuery({ q }) }}>
@@ -206,7 +213,7 @@ export default function Search({
               <li
                 key={key}
                 className={cn('py-1 text-accents-8', {
-                  underline: sort === key,
+                  underline: sort === key
                 })}
               >
                 <Link href={{ pathname, query: filterQuery({ q, sort: key }) }}>

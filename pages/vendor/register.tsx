@@ -6,9 +6,8 @@ import { Layout } from '@components/common'
 import { Container, Button, Input } from '@components/ui'
 import { defatultPageProps } from '@lib/defaults'
 import LogoFull from '@components/ui/LogoFull'
-import { useUser } from '@lib/vendor/hooks'
+import { useVendor } from '@lib/hooks/useVendor'
 import useMagicLink from '@lib/hooks/useMagicLink'
-import { createVendor, getLoginSession } from '@lib/vendor/auth'
 import { useRouter } from 'next/router'
 
 export async function getStaticProps ({
@@ -29,7 +28,7 @@ export default function Register () {
   const { register } = useMagicLink()
   const router = useRouter()
 
-  useUser({ redirectTo: '/vendor/dashboard', redirectIfFound: true })
+  useVendor({ redirectTo: '/vendor/dashboard', redirectIfFound: true })
 
   const [errorMsg, setErrorMsg] = useState('')
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Layout } from '@components/common'
 import { Button, Container, Input } from '@components/ui'
 import LogoFull from '@components/ui/LogoFull'
-import { useUser } from '@lib/vendor/hooks'
+import { useVendor } from '@lib/hooks/useVendor'
 import useMagicLink from '@lib/hooks/useMagicLink'
 import { useRouter } from 'next/router'
 
@@ -11,7 +11,7 @@ export default function Signin () {
   const { signIn } = useMagicLink()
   const router = useRouter()
 
-  useUser({ redirectTo: '/vendor/dashboard', redirectIfFound: true })
+  useVendor({ redirectTo: '/vendor/dashboard', redirectIfFound: true })
 
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -19,12 +19,8 @@ export default function Signin () {
     e.preventDefault()
     if (errorMsg) setErrorMsg('')
     try {
-      const res = await signIn({ email })
-      if (res.status === 200) {
-        router.push('/vendor/dashboard')
-      } else {
-        throw new Error(await res.text())
-      }
+      await signIn({ email })
+      router.push('/vendor/dashboard')
     } catch (error) {
       console.error('An unexpected error occurred:', error)
       setErrorMsg(error.message)

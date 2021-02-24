@@ -1,5 +1,5 @@
-import { magic } from '@lib/vendor/magic'
-import { setLoginSession } from '@lib/vendor/auth'
+import { magic } from '@lib/auth/magic'
+import { setLoginSession } from '@lib/auth/session'
 
 export default async function login (req, res) {
   try {

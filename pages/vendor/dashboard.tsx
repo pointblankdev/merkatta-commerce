@@ -2,8 +2,9 @@ import cn from 'classnames'
 import { useState } from 'react'
 import { Layout } from '@components/common'
 import { Container, Products, Settings } from '@components/ui'
-import { getBrandIdFromSession, getLoginSession } from '@lib/vendor/auth'
-import { useUser } from '@lib/vendor/hooks'
+import { getBrandIdFromSession } from '@lib/auth/utils'
+import { useVendor } from '@lib/hooks/useVendor'
+import { getLoginSession } from '@lib/auth/session'
 
 export async function getServerSideProps (ctx) {
   try {
@@ -37,7 +38,7 @@ export async function getServerSideProps (ctx) {
 }
 
 export default function Dashboard ({ products = [] }) {
-  useUser({ redirectTo: '/vendor/signin', redirectIfFound: false })
+  useVendor({ redirectTo: '/vendor/signin', redirectIfFound: false })
   const categories = [
     { index: 0, label: 'Product' },
     { index: 1, label: 'Settings' }

@@ -1,6 +1,6 @@
 import rangeMap from '@lib/range-map'
 import { Layout } from '@components/common'
-import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
+import HomeAllProductsList from '@components/common/HomeAllProductsList'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
@@ -83,7 +83,7 @@ export default function Home ({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
-      <HomeAllProductsGrid
+      <HomeAllProductsList
         categories={categories}
         brands={brands}
         newestProducts={newestProducts}

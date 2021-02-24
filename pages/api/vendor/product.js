@@ -1,4 +1,5 @@
-import { getBrandIdFromSession, getLoginSession } from '@lib/vendor/auth'
+import { getLoginSession } from '@lib/auth/session'
+import { getBrandIdFromSession } from '@lib/auth/utils'
 import _ from 'lodash'
 
 export default async function product (req, res) {

@@ -62,7 +62,7 @@ const Navbar: FC = () => {
                 <Searchbar />
               </div>
               <div className="flex flex-1 justify-end space-x-8">
-                <UserNav />
+                {/* <UserNav /> */}
               </div>
             </>
           )}

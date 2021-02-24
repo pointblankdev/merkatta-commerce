@@ -80,7 +80,7 @@ const ProductView: FC<Props> = ({ product, data }) => {
         }}
       />
       <div className={cn(s.root, 'fit')}>
-        <div className={cn(s.productDisplay, 'fit')}>
+        {/* <div className={cn(s.productDisplay, 'fit')}>
           <div className={s.nameBox}>
             <h1 className={s.name}>{product.name}</h1>
             <div className={s.price}>
@@ -105,7 +105,7 @@ const ProductView: FC<Props> = ({ product, data }) => {
               ))}
             </ProductSlider>
           </div>
-        </div>
+        </div> */}
 
         <div className={s.sidebar}>
           <section>
@@ -140,7 +140,7 @@ const ProductView: FC<Props> = ({ product, data }) => {
 
             <ProductItem product={data} />
           </section>
-          <div>
+          <div className="flex justify-center">
             <Button
               aria-label="Contact Seller"
               type="button"
@@ -186,24 +186,27 @@ const ProductItem = ({ product }) => {
     product.availability_description === 'Ships within 24 hours' ? '✔️' : ''
   return (
     <section>
-      <div className="flex flex-col">
-        <div className="px-6 py-4 whitespace-nowrap">
-          <div className="text-xl text-gray-900">{product.sku}</div>
+      <div className="px-6 py-4 whitespace-nowrap">
+        <div className="text-2xl text-gray-900">{product.sku}</div>
+      </div>
+      <div className="flex flex-col my-10">
+        <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+          {`Price per Unit: $${product.price} / ${units || 'unit'}`}
         </div>
         <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          {`Price per Unit: $${product.price} / ${units}`}
+          Ships in 24 Hours: {shipsIn24Hours || 'No'}
         </div>
         <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          Ships in 24 Hours: {shipsIn24Hours}
+          Minimum Order Size: {product.order_quantity_minimum || '10,000'}
+          &nbsp;
+          {units || 'units'}
         </div>
         <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          Minimum Order Size: {product.order_quantity_minimum}&nbsp;{units}
+          Maximum width cut:{' '}
+          {product.width ? `${product.width}"` : 'Not defined'}
         </div>
         <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          Maximum width cut: {product.width ? `${product.width}"` : ''}
-        </div>
-        <div className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          Trial Rolls Offered: {trialRollsOffered}
+          Trial Rolls Offered: {trialRollsOffered || 'No'}
         </div>
       </div>
     </section>
@@ -213,7 +216,7 @@ const ProductItem = ({ product }) => {
 const ContactSellerModal = ({ show, onClose }) => {
   if (!show) return null
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto">
+    <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div

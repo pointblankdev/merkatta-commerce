@@ -1,5 +1,5 @@
-import { createUser, createVendor, getLoginSession } from '@lib/vendor/auth'
-import { magic } from '@lib/vendor/magic'
+import { createUser, createVendor } from '@lib/auth/utils'
+import { magic } from '@lib/auth/magic'
 
 export default async function register (req, res) {
   try {
