@@ -1,14 +1,15 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
 import { Layout } from '@components/common'
 import { Button, Container, Input } from '@components/ui'
 import LogoFull from '@components/ui/LogoFull'
 import { useUser } from '@lib/vendor/hooks'
-import { Magic } from 'magic-sdk'
+import useMagicLink from '@lib/hooks/useMagicLink'
+import { useRouter } from 'next/router'
 
 export default function Signin () {
-  const router = useRouter()
   const [email, setEmail] = useState('')
+  const { signIn } = useMagicLink()
+  const router = useRouter()
 
   useUser({ redirectTo: '/vendor/dashboard', redirectIfFound: true })
 
@@ -16,27 +17,9 @@ export default function Signin () {
 
   async function handleSubmit (e) {
     e.preventDefault()
-
     if (errorMsg) setErrorMsg('')
-
-    const body = {
-      email
-    }
-
-    // TODO: Centralize into consumer
     try {
-      const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY)
-      const didToken = await magic.auth.loginWithMagicLink({
-        email: body.email
-      })
-      const res = await fetch('/api/vendor/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + didToken
-        },
-        body: JSON.stringify(body)
-      })
+      const res = await signIn({ email })
       if (res.status === 200) {
         router.push('/vendor/dashboard')
       } else {

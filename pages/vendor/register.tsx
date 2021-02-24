@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import type { GetStaticPropsContext } from 'next'
-import { useRouter } from 'next/router'
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
 import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import { Layout } from '@components/common'
@@ -8,7 +7,9 @@ import { Container, Button, Input } from '@components/ui'
 import { defatultPageProps } from '@lib/defaults'
 import LogoFull from '@components/ui/LogoFull'
 import { useUser } from '@lib/vendor/hooks'
-import { Magic } from 'magic-sdk'
+import useMagicLink from '@lib/hooks/useMagicLink'
+import { createVendor, getLoginSession } from '@lib/vendor/auth'
+import { useRouter } from 'next/router'
 
 export async function getStaticProps ({
   preview,
@@ -24,7 +25,8 @@ export async function getStaticProps ({
 export default function Register () {
   const [seller, setSeller] = useState('')
   const [email, setEmail] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [loading] = useState(false)
+  const { register } = useMagicLink()
   const router = useRouter()
 
   useUser({ redirectTo: '/vendor/dashboard', redirectIfFound: true })
@@ -33,32 +35,10 @@ export default function Register () {
 
   async function handleSubmit (e) {
     e.preventDefault()
-
     if (errorMsg) setErrorMsg('')
-    // TODO: Add seller name to body, need to add field in backend
-    const body = {
-      email
-    }
-
-    // TODO: Centralize into consumer
     try {
-      const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY)
-      const didToken = await magic.auth.loginWithMagicLink({
-        email: body.email
-      })
-      const res = await fetch('/api/vendor/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + didToken
-        },
-        body: JSON.stringify(body)
-      })
-      if (res.status === 200) {
-        router.push('/vendor/dashboard')
-      } else {
-        throw new Error(await res.text())
-      }
+      await register({ email, name: seller })
+      router.push('/vendor/signin')
     } catch (error) {
       console.error('An unexpected error occurred:', error)
       setErrorMsg(error.message)
