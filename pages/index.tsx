@@ -113,6 +113,6 @@ Home.Layout = Layout
  * This is temporary.
  * Make home the default export for local dev.
  */
-export function ComingSoon () {
-  return <Blog />
-}
+// export function ComingSoon () {
+//   return <Blog />
+// }
