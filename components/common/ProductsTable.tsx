@@ -37,7 +37,7 @@ const ProductsTable = ({ data }) => {
               key={node.id}
               className="bg-gradient-to-l odd:from-gray-200 h-16"
             >
-              <td className="px-16 py-2 flex flex-row items-center overflow-hidden">
+              <td className="px-16 py-2 flex flex-row items-center overflow-hidden select-none pointer-events-none">
                 <img
                   className="h-16 w-16 rounded-full object-cover opacity-50"
                   src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/paper_roll.png"
