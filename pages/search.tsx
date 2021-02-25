@@ -1,5 +1,10 @@
 import cn from 'classnames'
-import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import type {
+  GetServerSidePropsContext,
+  GetStaticPropsContext,
+  InferGetServerSidePropsType,
+  InferGetStaticPropsType
+} from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { getConfig } from '@bigcommerce/storefront-data-hooks/api'
@@ -18,17 +23,34 @@ import {
   getDesignerPath,
   useSearchMeta
 } from '@lib/search'
+import ProductsTable from '@components/common/ProductsTable'
 
-export async function getStaticProps ({
+export async function getServerSideProps ({
+  query,
   preview,
   locale
-}: GetStaticPropsContext) {
+}: GetServerSidePropsContext) {
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ config, preview })
   const { categories, brands } = await getSiteInfo({ config, preview })
 
+  let search = ''
+  if (query.q) {
+    search = `&keyword=${query.q}`
+  }
+  const { data } = await fetch(
+    `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products?include=custom_fields${search}`,
+    {
+      headers: {
+        'content-type': 'application/json',
+        accept: 'application/json',
+        'x-auth-token': process.env.ACCESS_TOKEN
+      }
+    }
+  ).then((r) => r.json())
+
   return {
-    props: { pages, categories, brands }
+    props: { pages, categories, brands, data }
   }
 }
 
@@ -41,8 +63,9 @@ const SORT = Object.entries({
 
 export default function Search ({
   categories,
-  brands
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+  brands,
+  data: p
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter()
   const { asPath } = router
   const { q, sort } = router.query
@@ -119,7 +142,7 @@ export default function Search ({
             ))}
           </ul>
         </div>
-        <div className="col-span-8">
+        <div className="col-span-10">
           {(q || activeCategory || activeBrand) && (
             <div className="mb-12 transition ease-in duration-75">
               {data
@@ -131,7 +154,7 @@ export default function Search ({
                       hidden: !data.found
                     })}
                   >
-                    Showing {data.products.length} results{' '}
+                    Showing {p.length} results{' '}
                     {q && (
                       <>
                         for "<strong>{q}</strong>"
@@ -173,17 +196,7 @@ export default function Search ({
 
           {data
             ? (
-            <div className="flex-1">
-              {data.products.map(({ node }: any) => (
-                <ProductList
-                  key={node.path}
-                  product={node}
-                  variant="label"
-                  imgWidth={480}
-                  imgHeight={80}
-                />
-              ))}
-            </div>
+            <ProductsTable data={p} />
               )
             : (
             <div className="flex-1">
@@ -197,7 +210,7 @@ export default function Search ({
             </div>
               )}
         </div>
-        <div className="col-span-2">
+        {/* <div className="col-span-2">
           <ul>
             <li className="py-1 text-base font-bold tracking-wide">Sort</li>
             <li
@@ -222,7 +235,7 @@ export default function Search ({
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </div>
     </Container>
   )

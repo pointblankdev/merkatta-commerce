@@ -1,22 +1,24 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import { Hero, Marquee } from '@components/ui'
-import { ProductCard, ProductList } from '@components/product'
+import { Hero } from '@components/ui'
 import s from './HomeAllProductsList.module.css'
 import { getCategoryPath, getDesignerPath } from '@lib/search'
+import ProductsTable from '../ProductsTable'
 
 interface Props {
   bestSelling?: any
   categories?: any
   brands?: any
   newestProducts?: any
+  data?: any
 }
 
 const Head: FC<Props> = ({
   categories,
   brands,
   newestProducts,
-  bestSelling
+  bestSelling,
+  data
 }) => {
   return (
     <div className={s.root}>
@@ -58,29 +60,7 @@ const Head: FC<Props> = ({
           description="
         The simplest wholesale packaging marketplace."
         />
-        <Marquee>
-          {bestSelling.slice(0, 3).map(({ node }) => (
-            <ProductCard
-              key={node.path}
-              product={node}
-              variant="tag"
-              imgWidth={320}
-              imgHeight={320}
-              imgLayout="fixed"
-            />
-          ))}
-        </Marquee>
-        <div className="flex-1">
-          {newestProducts.map(({ node }: any) => (
-            <ProductList
-              key={node.path}
-              product={node}
-              variant="label"
-              imgWidth={480}
-              imgHeight={80}
-            />
-          ))}
-        </div>
+        <ProductsTable data={data} />
       </div>
     </div>
   )

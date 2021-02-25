@@ -36,6 +36,17 @@ export async function getStaticProps ({
     preview
   })
 
+  const { data } = await fetch(
+    `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products?include=custom_fields`,
+    {
+      headers: {
+        'content-type': 'application/json',
+        accept: 'application/json',
+        'x-auth-token': process.env.ACCESS_TOKEN
+      }
+    }
+  ).then((r) => r.json())
+
   const { categories, brands } = await getSiteInfo({ config, preview })
   const { pages } = await getAllPages({ config, preview })
 
@@ -66,7 +77,8 @@ export async function getStaticProps ({
       newestProducts,
       categories,
       brands,
-      pages
+      pages,
+      data
     },
     revalidate: 14400
   }
@@ -79,7 +91,8 @@ export default function Home ({
   bestSelling,
   brands,
   categories,
-  newestProducts
+  newestProducts,
+  data
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
@@ -88,6 +101,7 @@ export default function Home ({
         brands={brands}
         newestProducts={newestProducts}
         bestSelling={bestSelling}
+        data={data}
       />
     </div>
   )

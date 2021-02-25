@@ -7,6 +7,7 @@ import s from './Navbar.module.css'
 import { Logo, Container } from '@components/ui'
 import { Searchbar, UserNav } from '@components/common'
 import Avatar from '../Avatar'
+import LogoFull from '@components/ui/LogoFull'
 
 const Navbar: FC = () => {
   const [hasScrolled, setHasScrolled] = useState(false)
@@ -35,7 +36,7 @@ const Navbar: FC = () => {
           <div className="flex flex-1 items-center">
             <Link href="/">
               <a aria-label="Logo">
-                <Logo />
+                <LogoFull />
               </a>
             </Link>
             <nav className="space-x-4 ml-6 hidden">

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { Page } from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import getSlug from '@lib/get-slug'
-import { Container } from '@components/ui'
+import { Container, Logo } from '@components/ui'
 import LogoFull from '@components/ui/LogoFull'
 
 interface Props {
@@ -26,7 +26,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
           <div className="col-span-1 lg:col-span-2">
             <Link href="/">
               <a className="invisible flex flex-initial items-center font-bold md:mr-24 md:visible">
-                  <LogoFull />
+                <Logo />
               </a>
             </Link>
           </div>
@@ -78,13 +78,12 @@ const Footer: FC<Props> = ({ className, pages }) => {
             </ul>
           </div> */}
         </div>
-        
       </Container>
     </footer>
   )
 }
 
-function usePages(pages?: Page[]) {
+function usePages (pages?: Page[]) {
   const { locale } = useRouter()
   const sitePages: Page[] = []
   const legalPages: Page[] = []
@@ -106,7 +105,7 @@ function usePages(pages?: Page[]) {
 
   return {
     sitePages: sitePages.sort(bySortOrder),
-    legalPages: legalPages.sort(bySortOrder),
+    legalPages: legalPages.sort(bySortOrder)
   }
 }
 
@@ -116,7 +115,7 @@ const isLegalPage = (slug: string, locale?: string) =>
     : LEGAL_PAGES.includes(slug)
 
 // Sort pages by the sort order assigned in the BC dashboard
-function bySortOrder(a: Page, b: Page) {
+function bySortOrder (a: Page, b: Page) {
   return (a.sort_order ?? 0) - (b.sort_order ?? 0)
 }
 

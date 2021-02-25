@@ -56,6 +56,8 @@ module.exports = {
   },
   plugins: [require('@tailwindcss/ui')],
   variants: {
-    opacity: ({ after }) => after(['disabled'])
+    opacity: ({ after }) => after(['disabled']),
+    background: ['odd', 'even', 'hover'],
+    gradientColorStops: ['odd', 'even']
   }
 }

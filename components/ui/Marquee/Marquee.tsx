@@ -13,28 +13,30 @@ interface Props {
 const Maquee: FC<Props> = ({
   className = '',
   children,
-  variant = 'primary',
+  variant = 'primary'
 }) => {
   const rootClassName = cn(
     s.root,
     {
       [s.primary]: variant === 'primary',
-      [s.secondary]: variant === 'secondary',
+      [s.secondary]: variant === 'secondary'
     },
     className
   )
   const [ref, inView] = useInView({
     triggerOnce: true,
-    rootMargin: '200px 0px',
+    rootMargin: '200px 0px'
   })
 
   return (
     <div className={rootClassName} ref={ref}>
-      {inView ? (
+      {inView
+        ? (
         <Ticker offset={80}>
           {() => <div className={s.container}>{children}</div>}
         </Ticker>
-      ) : null}
+          )
+        : null}
     </div>
   )
 }
