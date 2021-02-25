@@ -18,7 +18,7 @@ const Loading = () => (
 )
 
 const dynamicProps = {
-  loading: () => <Loading />,
+  loading: () => <Loading />
 }
 
 const LoginView = dynamic(
@@ -50,14 +50,14 @@ const Layout: FC<Props> = ({ children, pageProps }) => {
     displayModal,
     closeSidebar,
     closeModal,
-    modalView,
+    modalView
   } = useUI()
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
   const { locale = 'en-US' } = useRouter()
 
   return (
     <CommerceProvider locale={locale}>
-      <div className={cn(s.root) + " flex flex-col"}>
+      <div className={cn(s.root) + ' flex flex-col'}>
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer pages={pageProps.pages} />

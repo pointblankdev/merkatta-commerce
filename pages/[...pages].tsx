@@ -1,7 +1,7 @@
 import type {
   GetStaticPathsContext,
   GetStaticPropsContext,
-  InferGetStaticPropsType,
+  InferGetStaticPropsType
 } from 'next'
 import getSlug from '@lib/get-slug'
 import { missingLocaleInPages } from '@lib/usage-warns'
@@ -12,10 +12,10 @@ import getPage from '@bigcommerce/storefront-data-hooks/api/operations/get-page'
 import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import { defatultPageProps } from '@lib/defaults'
 
-export async function getStaticProps({
+export async function getStaticProps ({
   preview,
   params,
-  locale,
+  locale
 }: GetStaticPropsContext<{ pages: string[] }>) {
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ preview, config })
@@ -35,11 +35,11 @@ export async function getStaticProps({
 
   return {
     props: { ...defatultPageProps, pages, page },
-    revalidate: 60 * 60, // Every hour
+    revalidate: 60 * 60 // Every hour
   }
 }
 
-export async function getStaticPaths({ locales }: GetStaticPathsContext) {
+export async function getStaticPaths ({ locales }: GetStaticPathsContext) {
   const { pages } = await getAllPages()
   const [invalidPaths, log] = missingLocaleInPages()
   const paths = pages
@@ -57,12 +57,12 @@ export async function getStaticPaths({ locales }: GetStaticPathsContext) {
     paths,
     // Fallback shouldn't be enabled here or otherwise this route
     // will catch every page, even 404s, and we don't want that
-    fallback: false,
+    fallback: false
   }
 }
 
-export default function Pages({
-  page,
+export default function Pages ({
+  page
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className="max-w-2xl mx-auto py-20">
