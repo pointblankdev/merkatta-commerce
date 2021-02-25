@@ -40,13 +40,6 @@ const Footer: FC<Props> = ({ className, pages }) => {
                 </Link>
               </li>
               <li className="px-3">
-                <Link href="/">
-                  <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
-                    Careers
-                  </a>
-                </Link>
-              </li>
-              <li className="px-3">
                 <Link href="/blog">
                   <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
                     Blog
