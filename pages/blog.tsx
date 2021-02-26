@@ -4,6 +4,7 @@ import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-a
 import { Layout } from '@components/common'
 import { Container } from '@components/ui'
 import dynamic from 'next/dynamic'
+import { useEffect, useState } from 'react'
 const Confetti = dynamic(() => import('react-confetti'))
 
 export async function getStaticProps ({
@@ -18,9 +19,13 @@ export async function getStaticProps ({
 }
 
 export default function Blog ({ pages }) {
+  const [loaded, setLoaded] = useState(false)
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
   return (
     <>
-      {pages && <Confetti style={{ zIndex: 100 }} recycle={false} />}
+      {loaded && <Confetti style={{ zIndex: 100 }} recycle={false} />}
       <div className="pb-20">
         <div className="text-center pt-40 pb-56 bg-secondary">
           <Container>
