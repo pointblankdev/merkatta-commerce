@@ -38,7 +38,7 @@ const Head: FC<Props> = ({
               </li>
             ))}
           </ul>
-          <ul className="">
+          {/* <ul className="">
             <li className="py-1 text-base font-bold tracking-wide">
               <Link href={getDesignerPath('')}>
                 <a>All Vendors</a>
@@ -51,7 +51,7 @@ const Head: FC<Props> = ({
                 </Link>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
       <div className="flex flex-col w-full">

@@ -117,7 +117,7 @@ export default function Search ({
               </li>
             ))}
           </ul>
-          <ul>
+          {/* <ul>
             <li className="py-1 text-base font-bold tracking-wide">
               <Link href={{ pathname: getDesignerPath('', category), query }}>
                 <a>All Vendors</a>
@@ -140,7 +140,7 @@ export default function Search ({
                 </Link>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
         <div className="col-span-10">
           {(q || activeCategory || activeBrand) && (
