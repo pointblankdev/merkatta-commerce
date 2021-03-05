@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import getSlug from './get-slug'
 
-export function useSearchMeta(asPath: string) {
+export function useSearchMeta (asPath: string) {
   const [pathname, setPathname] = useState<string>('/search')
   const [category, setCategory] = useState<string | undefined>()
   const [brand, setBrand] = useState<string | undefined>()
@@ -12,7 +12,7 @@ export function useSearchMeta(asPath: string) {
     const parts = path.split('/')
 
     let c = parts[2]
-    let b = parts[3]
+    const b = parts[3]
 
     if (c === 'designers') {
       c = parts[4]

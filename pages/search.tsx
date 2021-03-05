@@ -38,8 +38,14 @@ export async function getServerSideProps ({
   if (query.q) {
     search = `&keyword=${query.q}`
   }
+  let categoriesFilter = ''
+  if (query.category) {
+    categoriesFilter = `&categories=${
+      categories.find((c) => getSlug(c.path) === query.category)?.entityId
+    }`
+  }
   const { data } = await fetch(
-    `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products?include=custom_fields${search}`,
+    `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products?include=custom_fields${search}${categoriesFilter}`,
     {
       headers: {
         'content-type': 'application/json',
