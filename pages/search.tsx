@@ -181,8 +181,7 @@ export default function Search ({
                         )
                       : (
                       <>
-                        There are no products that match the selected category &
-                        designer
+                        There are no products that match the selected category
                       </>
                         )}
                   </span>
