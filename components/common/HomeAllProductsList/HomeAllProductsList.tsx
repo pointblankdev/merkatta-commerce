@@ -60,7 +60,7 @@ const Head: FC<Props> = ({
           description="
         The simplest wholesale packaging marketplace."
         />
-        <ProductsTable data={data} />
+        <ProductsTable data={data} categories={categories} />
       </div>
     </div>
   )

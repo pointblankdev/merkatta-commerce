@@ -55,6 +55,13 @@ const Footer: FC<Props> = ({ className, pages }) => {
                   </Link>
                 </li>
               ))}
+              <li className="px-3">
+                <Link href="https://www.linkedin.com/company/merkatta/">
+                  <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                    LinkedIn
+                  </a>
+                </Link>
+              </li>
             </ul>
           </div>
           {/* <div className="col-span-1 lg:col-span-2">
