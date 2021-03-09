@@ -37,8 +37,8 @@ const ContactSellerModal = ({ show, onClose }) => {
                 </h3>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    You can learn more about this product by calling the number
-                    below.
+                    You can learn more about this product by emailing us or
+                    calling the number below.
                   </p>
                 </div>
                 <div className="mt-8">
