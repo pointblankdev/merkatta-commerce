@@ -202,7 +202,7 @@ export default function Search ({
 
           {data
             ? (
-            <ProductsTable data={p} />
+            <ProductsTable data={p} categories={categories} />
               )
             : (
             <div className="flex-1">
