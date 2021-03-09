@@ -66,7 +66,7 @@ export default function Blog ({ pages }) {
         </div> */}
           {/** Replace by HTML Content */}
           <div className="text-lg leading-7 font-fine py-6 text-justify max-w-6xl mx-auto">
-            <p className="py-6 text-center">Stay tuned from something great!</p>
+            <p className="py-6 text-center">Stay tuned for something great!</p>
             {/* <p className="py-6">
             Biscuit sugar plum sweet chocolate cake sesame snaps soufflé
             topping. Gummies topping bonbon chocolate pudding cookie. Wafer
