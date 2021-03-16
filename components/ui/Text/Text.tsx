@@ -1,7 +1,7 @@
 import React, {
   FunctionComponent,
   JSXElementConstructor,
-  CSSProperties,
+  CSSProperties
 } from 'react'
 import cn from 'classnames'
 import s from './Text.module.css'
@@ -21,7 +21,7 @@ const Text: FunctionComponent<Props> = ({
   className = '',
   variant = 'body',
   children,
-  html,
+  html
 }) => {
   const componentsMap: {
     [P in Variant]: React.ComponentType<any> | string
@@ -29,7 +29,7 @@ const Text: FunctionComponent<Props> = ({
     body: 'p',
     heading: 'h1',
     pageHeading: 'h1',
-    sectionHeading: 'h2',
+    sectionHeading: 'h2'
   }
 
   const Component:
@@ -40,19 +40,20 @@ const Text: FunctionComponent<Props> = ({
 
   const htmlContentProps = html
     ? {
-        dangerouslySetInnerHTML: { __html: html },
+        dangerouslySetInnerHTML: { __html: html }
       }
     : {}
 
   return (
     <Component
       className={cn(
+        'font-thin',
         s.root,
         {
           [s.body]: variant === 'body',
           [s.heading]: variant === 'heading',
           [s.pageHeading]: variant === 'pageHeading',
-          [s.sectionHeading]: variant === 'sectionHeading',
+          [s.sectionHeading]: variant === 'sectionHeading'
         },
         className
       )}

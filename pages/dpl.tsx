@@ -92,7 +92,7 @@ export default function DPL ({
 
   return (
     <Container>
-      <div className="max-w-2xl mx-auto py-20">
+      <div className="max-w mx-auto py-6">
         {page?.body && <Text html={page.body} />}
       </div>
       <div className="grid grid-cols-12 gap-4 mt-3 mb-20">
