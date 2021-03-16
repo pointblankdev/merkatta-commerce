@@ -12,17 +12,11 @@ import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-a
 import getSiteInfo from '@bigcommerce/storefront-data-hooks/api/operations/get-site-info'
 import useSearch from '@bigcommerce/storefront-data-hooks/products/use-search'
 import { Layout } from '@components/common'
-import { ProductList } from '@components/product'
 import { Container, Skeleton } from '@components/ui'
 
 import rangeMap from '@lib/range-map'
 import getSlug from '@lib/get-slug'
-import {
-  filterQuery,
-  getCategoryPath,
-  getDesignerPath,
-  useSearchMeta
-} from '@lib/search'
+import { filterQuery, getCategoryPath, useSearchMeta } from '@lib/search'
 import ProductsTable from '@components/common/ProductsTable'
 
 export async function getServerSideProps ({
@@ -38,12 +32,9 @@ export async function getServerSideProps ({
   if (query.q) {
     search = `&keyword=${query.q}`
   }
-  let categoriesFilter = ''
-  if (query.category) {
-    categoriesFilter = `&categories=${
-      categories.find((c) => getSlug(c.path) === query.category)?.entityId
-    }`
-  }
+  const categoriesFilter = `&categories=${
+    categories.find((c) => getSlug(c.path) === 'excess-inventory')?.entityId
+  }`
   const { data } = await fetch(
     `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products?include=custom_fields${search}${categoriesFilter}`,
     {
@@ -55,19 +46,14 @@ export async function getServerSideProps ({
     }
   ).then((r) => r.json())
 
+  console.log(data.length)
+
   return {
     props: { pages, categories, brands, data }
   }
 }
 
-const SORT = Object.entries({
-  'latest-desc': 'Latest arrivals',
-  'trending-desc': 'Trending',
-  'price-asc': 'Price: Low to high',
-  'price-desc': 'Price: High to low'
-})
-
-export default function Search ({
+export default function ExcessInventory ({
   categories,
   brands,
   data: p
@@ -80,7 +66,7 @@ export default function Search ({
   // of those is selected
   const query = filterQuery({ sort })
 
-  const { pathname, category, brand } = useSearchMeta(asPath)
+  const { category, brand } = useSearchMeta(asPath)
   const activeCategory = categories.find(
     (cat) => getSlug(cat.path) === category
   )
@@ -246,4 +232,4 @@ export default function Search ({
   )
 }
 
-Search.Layout = Layout
+ExcessInventory.Layout = Layout

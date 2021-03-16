@@ -23,11 +23,11 @@ const Head: FC<Props> = ({
       <div className={s.asideWrapper}>
         <div className={s.aside}>
           <ul className="mb-10">
-            <li className="py-1 text-base font-bold tracking-wide">
+            {/* <li className="py-1 text-base font-bold tracking-wide">
               <Link href={getCategoryPath('')}>
                 <a>All Categories</a>
               </Link>
-            </li>
+            </li> */}
             {categories.map((cat: any) => (
               <li key={cat.path} className="py-1 text-accents-8">
                 <Link href={getCategoryPath(cat.path)}>

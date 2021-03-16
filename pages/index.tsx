@@ -8,6 +8,7 @@ import getAllProducts from '@bigcommerce/storefront-data-hooks/api/operations/ge
 import getSiteInfo from '@bigcommerce/storefront-data-hooks/api/operations/get-site-info'
 import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-all-pages'
 import Blog from './blog'
+import getSlug from '@lib/get-slug'
 
 export async function getStaticProps ({
   preview,
@@ -36,8 +37,14 @@ export async function getStaticProps ({
     preview
   })
 
+  const { categories, brands } = await getSiteInfo({ config, preview })
+  const { pages } = await getAllPages({ config, preview })
+
+  const categoriesFilter = `&categories=${
+    categories.find((c) => getSlug(c.path) === 'ppfp')?.entityId
+  }`
   const { data } = await fetch(
-    `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products?include=custom_fields`,
+    `https://api.bigcommerce.com/stores/${process.env.STORE_HASH}/v3/catalog/products?include=custom_fields${categoriesFilter}`,
     {
       headers: {
         'content-type': 'application/json',
@@ -46,9 +53,6 @@ export async function getStaticProps ({
       }
     }
   ).then((r) => r.json())
-
-  const { categories, brands } = await getSiteInfo({ config, preview })
-  const { pages } = await getAllPages({ config, preview })
 
   // These are the products that are going to be displayed in the landing.
   // We prefer to do the computation at buildtime/servertime

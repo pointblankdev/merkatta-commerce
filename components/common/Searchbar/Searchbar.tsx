@@ -39,7 +39,7 @@ const Searchbar: FC<Props> = ({ className, id = 'search' }) => {
 
               router.push(
                 {
-                  pathname: '/search',
+                  pathname: `${window.location.pathname}`,
                   query: q ? { q } : {}
                 },
                 undefined,

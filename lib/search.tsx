@@ -38,15 +38,11 @@ export const filterQuery = (query: any) =>
 export const getCategoryPath = (path: string, brand?: string) => {
   const category = getSlug(path)
 
-  return `/search${brand ? `/designers/${brand}` : ''}${
-    category ? `/${category}` : ''
-  }`
+  return `/${category}`
 }
 
 export const getDesignerPath = (path: string, category?: string) => {
   const designer = getSlug(path).replace(/^brands/, 'designers')
 
-  return `/search${designer ? `/${designer}` : ''}${
-    category ? `/${category}` : ''
-  }`
+  return `/${designer ? `/${designer}` : ''}${category ? `/${category}` : ''}`
 }
