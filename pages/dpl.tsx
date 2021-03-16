@@ -12,12 +12,14 @@ import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-a
 import getSiteInfo from '@bigcommerce/storefront-data-hooks/api/operations/get-site-info'
 import useSearch from '@bigcommerce/storefront-data-hooks/products/use-search'
 import { Layout } from '@components/common'
-import { Container, Skeleton } from '@components/ui'
+import { Container, Skeleton, Text } from '@components/ui'
 
 import rangeMap from '@lib/range-map'
 import getSlug from '@lib/get-slug'
 import { filterQuery, getCategoryPath, useSearchMeta } from '@lib/search'
 import ProductsTable from '@components/common/ProductsTable'
+import getPage from '@bigcommerce/storefront-data-hooks/api/operations/get-page'
+import DPLTable from '@components/common/DPLTable'
 
 export async function getServerSideProps ({
   query,
@@ -27,6 +29,14 @@ export async function getServerSideProps ({
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ config, preview })
   const { categories, brands } = await getSiteInfo({ config, preview })
+
+  const pageItem = pages.find((p) =>
+    p.url ? getSlug(p.url) === 'en-US/digital-pre-lams' : false
+  )
+  const d =
+    pageItem &&
+    (await getPage({ variables: { id: pageItem.id! }, config, preview }))
+  const page = d?.page
 
   let search = ''
   if (query.q) {
@@ -46,14 +56,13 @@ export async function getServerSideProps ({
     }
   ).then((r) => r.json())
 
-  console.log(data.length)
-
   return {
-    props: { pages, categories, brands, data }
+    props: { page, categories, brands, data }
   }
 }
 
 export default function DPL ({
+  page,
   categories,
   brands,
   data: p
@@ -83,6 +92,9 @@ export default function DPL ({
 
   return (
     <Container>
+      <div className="max-w-2xl mx-auto py-20">
+        {page?.body && <Text html={page.body} />}
+      </div>
       <div className="grid grid-cols-12 gap-4 mt-3 mb-20">
         <div className="col-span-2">
           <ul className="mb-10">
@@ -187,7 +199,7 @@ export default function DPL ({
 
           {data
             ? (
-            <ProductsTable data={p} categories={categories} />
+            <DPLTable data={p} categories={categories} />
               )
             : (
             <div className="flex-1">
