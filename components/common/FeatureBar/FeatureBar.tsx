@@ -1,7 +1,7 @@
 import cn from 'classnames'
 import s from './FeatureBar.module.css'
 
-interface FeatureBarProps {
+export interface FeatureBarProps {
   className?: string
   title: string
   description?: string

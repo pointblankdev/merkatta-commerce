@@ -1,57 +1,57 @@
 const bundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: !!process.env.BUNDLE_ANALYZE
+  enabled: !!process.env.BUNDLE_ANALYZE,
 })
 
 module.exports = bundleAnalyzer({
   images: {
-    domains: ['cdn11.bigcommerce.com']
+    domains: ['cdn11.bigcommerce.com'],
   },
   i18n: {
     locales: ['en-US', 'es'],
-    defaultLocale: 'en-US'
+    defaultLocale: 'en-US',
   },
-  rewrites () {
+  rewrites() {
     return [
       {
         source: '/:locale/checkout',
-        destination: '/api/bigcommerce/checkout'
+        destination: '/api/bigcommerce/checkout',
       },
       {
         source: '/checkout',
-        destination: '/api/bigcommerce/checkout'
+        destination: '/api/bigcommerce/checkout',
       },
       // The logout is also an action so this route is not required, but it's also another way
       // you can allow a logout!
       {
         source: '/:locale/logout',
-        destination: '/api/bigcommerce/customers/logout?redirect_to=/'
+        destination: '/api/bigcommerce/customers/logout?redirect_to=/',
       },
       {
         source: '/logout',
-        destination: '/api/bigcommerce/customers/logout?redirect_to=/'
+        destination: '/api/bigcommerce/customers/logout?redirect_to=/',
       },
       // Rewrites for /search
       {
         source: '/:locale/search',
-        destination: '/search'
+        destination: '/search',
       },
       {
         source: '/:locale/search/:path*',
-        destination: '/search'
+        destination: '/search',
       },
       {
         source: '/search/designers/:name',
-        destination: '/search'
+        destination: '/search',
       },
       {
         source: '/search/designers/:name/:category',
-        destination: '/search'
+        destination: '/search',
       },
       {
         // This rewrite will also handle `/search/designers`
         source: '/search/:category',
-        destination: '/search'
-      }
+        destination: '/search',
+      },
     ]
-  }
+  },
 })

@@ -1,10 +1,10 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
 
-import Button, { ButtonProps } from '../components/ui/Button'
+import Button, { ButtonProps } from '.'
 
 export default {
   title: 'UI/Button',
-  component: Button
+  component: Button,
 } as Meta
 
 const Template: Story<ButtonProps> = (args) => <Button {...args}>Button</Button>
@@ -16,10 +16,10 @@ Slim.argTypes = {
   href: disabled,
   className: disabled,
   Component: disabled,
-  onClick: disabled
+  onClick: disabled,
 }
 Slim.args = {
-  variant: 'slim'
+  variant: 'slim',
 }
 
 export const Flat = Template.bind({})
@@ -27,8 +27,8 @@ Flat.argTypes = {
   href: disabled,
   className: disabled,
   Component: disabled,
-  onClick: disabled
+  onClick: disabled,
 }
 Flat.args = {
-  variant: 'flat'
+  variant: 'flat',
 }
