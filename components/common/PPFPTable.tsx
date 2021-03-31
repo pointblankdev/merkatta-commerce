@@ -46,7 +46,7 @@ const PPFPTable = ({ data, categories }) => {
                 <span>{node.name}</span>
               </td>
               <td className="text-center ml-2 font-normal">
-                <span>{node.width}</span>
+                <span>{node.height}</span>
               </td>
               <td className="text-center ml-2 font-normal">
                 <span>{node.width}</span>
@@ -54,7 +54,7 @@ const PPFPTable = ({ data, categories }) => {
               <td className="px-12 py-2">
                 <span className="text-green">
                   {find(node.custom_fields, {
-                    name: 'trailRollsOffered'
+                    name: 'trialRollsOffered'
                   })?.value
                     ? '✔️'
                     : null}

@@ -46,12 +46,13 @@ const ExcessInventoryTable = ({ data, categories }) => {
                 <span>{node.width}</span>
               </td>
               <td className="px-12 py-2 text-center">
-                <span className="text-green">
-                  {find(node.custom_fields, {
-                    name: 'shipsWithinDay'
-                  })?.value
-                    ? '✔️'
-                    : null}
+                <span className="text-gray-700">
+                  {
+                    find(node.custom_fields, {
+                      name: 'footageAvailable'
+                    })?.value
+                  }{' '}
+                  linear ft
                 </span>
               </td>
               <td className="px-12 py-2">
