@@ -3,7 +3,7 @@ import cn from 'classnames'
 import s from './Searchbar.module.css'
 import { useRouter } from 'next/router'
 
-interface Props {
+export interface Props {
   className?: string
   id?: string
 }
@@ -40,7 +40,7 @@ const Searchbar: FC<Props> = ({ className, id = 'search' }) => {
               router.push(
                 {
                   pathname: `${window.location.pathname}`,
-                  query: q ? { q } : {}
+                  query: q ? { q } : {},
                 },
                 undefined,
                 { shallow: false }

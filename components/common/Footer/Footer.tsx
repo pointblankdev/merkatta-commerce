@@ -7,7 +7,7 @@ import getSlug from '@lib/get-slug'
 import { Container, Logo } from '@components/ui'
 import LogoFull from '@components/ui/LogoFull'
 
-interface Props {
+export interface Props {
   className?: string
   children?: any
   pages?: Page[]
@@ -83,8 +83,8 @@ const Footer: FC<Props> = ({ className, pages }) => {
   )
 }
 
-function usePages (pages?: Page[]) {
-  const { locale } = useRouter()
+function usePages(pages?: Page[]) {
+  const router = useRouter()
   const sitePages: Page[] = []
   const legalPages: Page[] = []
 
@@ -93,9 +93,9 @@ function usePages (pages?: Page[]) {
       const slug = page.url && getSlug(page.url)
 
       if (!slug) return
-      if (locale && !slug.startsWith(`${locale}/`)) return
+      if (router.locale && !slug.startsWith(`${router.locale}/`)) return
 
-      if (isLegalPage(slug, locale)) {
+      if (isLegalPage(slug, router.locale)) {
         legalPages.push(page)
       } else {
         sitePages.push(page)
@@ -105,7 +105,7 @@ function usePages (pages?: Page[]) {
 
   return {
     sitePages: sitePages.sort(bySortOrder),
-    legalPages: legalPages.sort(bySortOrder)
+    legalPages: legalPages.sort(bySortOrder),
   }
 }
 
@@ -115,7 +115,7 @@ const isLegalPage = (slug: string, locale?: string) =>
     : LEGAL_PAGES.includes(slug)
 
 // Sort pages by the sort order assigned in the BC dashboard
-function bySortOrder (a: Page, b: Page) {
+function bySortOrder(a: Page, b: Page) {
   return (a.sort_order ?? 0) - (b.sort_order ?? 0)
 }
 
