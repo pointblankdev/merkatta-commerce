@@ -10,9 +10,9 @@ import getAllPages from '@bigcommerce/storefront-data-hooks/api/operations/get-a
 import Blog from './blog'
 import getSlug from '@lib/get-slug'
 
-export async function getStaticProps ({
+export async function getStaticProps({
   preview,
-  locale
+  locale,
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
 
@@ -20,21 +20,21 @@ export async function getStaticProps ({
   const { products: featuredProducts } = await getAllProducts({
     variables: { field: 'featuredProducts', first: 6 },
     config,
-    preview
+    preview,
   })
 
   // Get Best Selling Products
   const { products: bestSellingProducts } = await getAllProducts({
     variables: { field: 'bestSellingProducts', first: 6 },
     config,
-    preview
+    preview,
   })
 
   // Get Best Newest Products
   const { products: newestProducts } = await getAllProducts({
     variables: { field: 'newestProducts', first: 12 },
     config,
-    preview
+    preview,
   })
 
   const { categories, brands } = await getSiteInfo({ config, preview })
@@ -49,8 +49,8 @@ export async function getStaticProps ({
       headers: {
         'content-type': 'application/json',
         accept: 'application/json',
-        'x-auth-token': process.env.ACCESS_TOKEN
-      }
+        'x-auth-token': process.env.ACCESS_TOKEN,
+      },
     }
   ).then((r) => r.json())
 
@@ -70,7 +70,7 @@ export async function getStaticProps ({
       bestSelling: rangeMap(
         6,
         (i) => bestSellingProducts[i] ?? products.shift()
-      ).filter(nonNullable)
+      ).filter(nonNullable),
     }
   })()
 
@@ -82,21 +82,21 @@ export async function getStaticProps ({
       categories,
       brands,
       pages,
-      data
+      data,
     },
-    revalidate: 14400
+    revalidate: 14400,
   }
 }
 
 const nonNullable = (v: any) => v
 
-export default function Home ({
+export function Home({
   featured,
   bestSelling,
   brands,
   categories,
   newestProducts,
-  data
+  data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div>
@@ -117,6 +117,6 @@ Home.Layout = Layout
  * This is temporary.
  * Make home the default export for local dev.
  */
-// export function ComingSoon () {
-//   return <Blog />
-// }
+export default function ComingSoon() {
+  return <Blog pages={[]} />
+}

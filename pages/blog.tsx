@@ -7,18 +7,18 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 const Confetti = dynamic(() => import('react-confetti'))
 
-export async function getStaticProps ({
+export async function getStaticProps({
   preview,
-  locale
+  locale,
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
   const { pages } = await getAllPages({ config, preview })
   return {
-    props: { pages }
+    props: { pages },
   }
 }
 
-export default function Blog ({ pages }) {
+export default function Blog({ pages }) {
   const [loaded, setLoaded] = useState(false)
   useEffect(() => {
     setLoaded(true)
@@ -44,7 +44,7 @@ export default function Blog ({ pages }) {
                 <div className="flex-shrink-0 inline-flex rounded-full border-2 border-white">
                   <img
                     className="h-12 w-12 rounded-full"
-                    src="https://vercel.com/api/www/avatar/61182a9f6bda512b4d9263c9c8a60aabe0402f4c?s=204"
+                    src="MerkattaIcon.png"
                     alt="Avatar"
                   />
                 </div>
