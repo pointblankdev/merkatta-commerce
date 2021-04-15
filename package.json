@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "lint": "eslint '**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
     "googleapis": "^71.0.0",
