@@ -1,125 +1,34 @@
 {
-  "name": "nextjs-commerce",
-  "version": "1.0.0",
+  "name": "with-tailwindcss",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "analyze": "BUNDLE_ANALYZE=both yarn build",
-    "find:unused": "next-unused",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "build:storybook": "yarn build-storybook -o docs"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
-  },
-  "next-unused": {
-    "alias": {
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@assets/*": [
-        "assets/*"
-      ],
-      "@config/*": [
-        "config/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ]
-    },
-    "debug": true,
-    "include": [
-      "components",
-      "lib",
-      "pages"
-    ],
-    "exclude": [],
-    "entrypoints": [
-      "pages"
-    ]
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.6",
-    "@bigcommerce/storefront-data-hooks": "^1.0.2",
-    "@hapi/iron": "^6.0.0",
-    "@magic-sdk/admin": "^1.3.0",
-    "@reach/portal": "^0.11.2",
-    "@tailwindcss/ui": "^0.6.2",
-    "@types/body-scroll-lock": "^2.6.1",
-    "@types/lodash.throttle": "^4.1.6",
-    "@vercel/fetch": "^6.1.0",
-    "aws-amplify": "^3.3.13",
-    "axios": "^0.21.0",
-    "body-scroll-lock": "^3.1.5",
-    "bowser": "^2.11.0",
-    "classnames": "^2.2.6",
-    "email-validator": "^2.0.4",
-    "graphql": "^15.4.0",
-    "js-cookie": "^2.2.1",
-    "keen-slider": "^5.2.4",
-    "leva": "^0.2.3",
-    "lodash": "^4.17.20",
-    "lodash.random": "^3.2.0",
-    "lodash.throttle": "^4.1.1",
-    "magic-sdk": "^4.0.2",
-    "next": "^10.0.3-canary.3",
-    "next-seo": "^4.11.0",
-    "next-themes": "^0.0.4",
-    "node-fetch": "^2.6.1",
-    "postcss-nesting": "^7.0.1",
-    "react": "^16.14.0",
-    "react-confetti": "^6.0.1",
-    "react-dom": "^16.14.0",
-    "react-intersection-observer": "^8.30.1",
-    "react-merge-refs": "^1.1.0",
-    "react-ticker": "^1.2.2",
-    "react-use": "^17.1.1",
-    "swr": "^0.3.11",
-    "tailwindcss": "^1.9",
-    "valtio": "^0.7.0"
+    "googleapis": "^71.0.0",
+    "marked": "^2.0.3",
+    "next": "latest",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@next/bundle-analyzer": "^10.0.1",
-    "@storybook/addon-actions": "^6.1.21",
-    "@storybook/addon-essentials": "^6.1.21",
-    "@storybook/addon-links": "^6.1.21",
-    "@storybook/react": "^6.1.21",
-    "@types/bunyan": "^1.8.6",
-    "@types/bunyan-prettystream": "^0.1.31",
-    "@types/classnames": "^2.2.10",
-    "@types/js-cookie": "^2.2.6",
-    "@types/lodash.random": "^3.2.6",
-    "@types/node": "^14.11.2",
-    "@types/react": "^16.9.49",
-    "@typescript-eslint/eslint-plugin": "^4.15.0",
-    "@typescript-eslint/parser": "^4.15.0",
+    "@babel/core": "^7.13.15",
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-essentials": "^6.2.8",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/react": "^6.2.8",
+    "@tailwindcss/postcss7-compat": "^2.1.0",
+    "@types/node": "^14.14.37",
+    "@types/react": "^17.0.3",
+    "autoprefixer": "^9",
     "babel-loader": "^8.2.2",
-    "bunyan": "^1.8.14",
-    "bunyan-prettystream": "^0.1.3",
-    "eslint": "^7.20.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.22.0",
-    "next-unused": "^0.0.3",
-    "postcss-flexbugs-fixes": "^4.2.1",
-    "postcss-preset-env": "^6.7.0",
-    "prettier": "^2.2.1",
-    "prettier-eslint": "^12.0.0",
-    "storybook-css-modules-preset": "^1.0.7",
-    "tsconfig-paths-webpack-plugin": "^3.5.1",
-    "typescript": "^4.0.3"
-  },
-  "resolutions": {
-    "webpack": "^4"
-  },
-  "license": "MIT"
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "typescript": "^4.2.4"
+  }
 }
