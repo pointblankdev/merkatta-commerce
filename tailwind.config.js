@@ -10,6 +10,9 @@ module.exports = {
                 'golden-rod': '#faa73d',
                 teal: '#24a5a9',
                 indigo: '#202253'
+            },
+            fontFamily: {
+                poppins: "'Poppins', sans-serif"
             }
         }
     },
