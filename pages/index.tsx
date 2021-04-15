@@ -3,7 +3,7 @@ import { getWhyNextReasons } from '../lib/api';
 export default function IndexPage({ reasons }) {
     return (
         <div>
-            <div className='container mx-auto py-20 px-8 font-poppins'>
+            <div className='container mx-auto py-20 px-8 font-poppins font-medium'>
                 <h1 className='text-5xl text-center text-accent-1 mb-16'>Why Next.js?</h1>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
