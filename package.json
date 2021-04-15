@@ -1,13 +1,13 @@
 {
-  "name": "with-tailwindcss",
+  "name": "merkatta-commerce",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "storybook": "start-storybook -s public -p 6006",
+    "build-storybook": "build-storybook -s public -o docs-build",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
