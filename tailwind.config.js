@@ -1,6 +1,6 @@
 module.exports = {
   mode: "jit",
-  purge: ["./pages/**/*.tsx", "./stories/**/*.tsx"],
+  purge: ["./pages/**/*.tsx", "./stories/**/*.tsx", "./lib/**/*.tsx"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
