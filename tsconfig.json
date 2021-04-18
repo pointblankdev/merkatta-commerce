@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -14,17 +13,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "baseUrl": ".",
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
     "paths": {
       "@components/*": ["lib/components/*"],
       "@components": ["lib/components"],
-      "@public/*": ["public/*"],
-      "@public": ["public"],
       "@sections/*": ["lib/sections/*"],
       "@sections": ["lib/sections"],
-      "@styles/*": ["lib/styles/*"],
-      "@styles": ["lib/styles"],
       "@services/*": ["lib/services/*"],
       "@services": ["lib/services"],
+      "@public/*": ["public/*"],
+      "@public": ["public"],
+      "@styles/*": ["styles/*"],
+      "@styles": ["styles"],
       "@i18n": ["./i18n"],
       "@test/*": ["test/*"],
       "@test": ["test"]
