@@ -83,24 +83,24 @@ export default function Example() {
     <Popover className="relative bg-white">
       {({ open }) => (
         <>
-          <div className="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
+          <div className="flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <a href="#">
                 <span className="sr-only">Workflow</span>
                 <img
-                  className="h-8 w-auto sm:h-10"
+                  className="w-auto h-8 sm:h-10"
                   src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                   alt=""
                 />
               </a>
             </div>
-            <div className="-mr-2 -my-2 md:hidden">
-              <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <div className="-my-2 -mr-2 md:hidden">
+              <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                 <span className="sr-only">Open menu</span>
-                <MenuIcon className="h-6 w-6" aria-hidden="true" />
+                <MenuIcon className="w-6 h-6" aria-hidden="true" />
               </Popover.Button>
             </div>
-            <Popover.Group as="nav" className="hidden md:flex space-x-10">
+            <Popover.Group as="nav" className="hidden space-x-10 md:flex">
               <Popover className="relative">
                 {({ open }) => (
                   <>
@@ -132,18 +132,18 @@ export default function Example() {
                     >
                       <Popover.Panel
                         static
-                        className="absolute z-10 -ml-4 mt-3 transform w-screen max-w-md lg:max-w-2xl lg:ml-0 lg:left-1/2 lg:-translate-x-1/2"
+                        className="absolute z-10 w-screen max-w-md mt-3 -ml-4 transform lg:max-w-2xl lg:ml-0 lg:left-1/2 lg:-translate-x-1/2"
                       >
-                        <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                          <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
+                        <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                          <div className="relative grid gap-6 px-5 py-6 bg-white sm:gap-8 sm:p-8 lg:grid-cols-2">
                             {solutions.map((item) => (
                               <a
                                 key={item.name}
                                 href={item.href}
-                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                                className="flex items-start p-3 -m-3 rounded-lg hover:bg-gray-50"
                               >
-                                <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12">
-                                  <item.icon className="h-6 w-6" aria-hidden="true" />
+                                <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-indigo-500 rounded-md sm:h-12 sm:w-12">
+                                  <item.icon className="w-6 h-6" aria-hidden="true" />
                                 </div>
                                 <div className="ml-4">
                                   <p className="text-base font-medium text-gray-900">
@@ -159,7 +159,7 @@ export default function Example() {
                           <div className="p-5 bg-gray-50 sm:p-8">
                             <a
                               href="#"
-                              className="-m-3 p-3 flow-root rounded-md hover:bg-gray-100"
+                              className="flow-root p-3 -m-3 rounded-md hover:bg-gray-100"
                             >
                               <div className="flex items-center">
                                 <div className="text-base font-medium text-gray-900">
@@ -225,15 +225,15 @@ export default function Example() {
                     >
                       <Popover.Panel
                         static
-                        className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0"
+                        className="absolute z-10 w-screen max-w-xs px-2 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0"
                       >
-                        <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                          <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                        <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+                          <div className="relative grid gap-6 px-5 py-6 bg-white sm:gap-8 sm:p-8">
                             {resources.map((item) => (
                               <a
                                 key={item.name}
                                 href={item.href}
-                                className="-m-3 p-3 block rounded-md hover:bg-gray-50"
+                                className="block p-3 -m-3 rounded-md hover:bg-gray-50"
                               >
                                 <p className="text-base font-medium text-gray-900">
                                   {item.name}
@@ -251,16 +251,16 @@ export default function Example() {
                 )}
               </Popover>
             </Popover.Group>
-            <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+            <div className="items-center justify-end hidden md:flex md:flex-1 lg:w-0">
               <a
                 href="#"
-                className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                className="text-base font-medium text-gray-500 whitespace-nowrap hover:text-gray-900"
               >
                 Sign in
               </a>
               <a
                 href="#"
-                className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                className="inline-flex items-center justify-center px-4 py-2 ml-8 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm whitespace-nowrap hover:bg-indigo-700"
               >
                 Sign up
               </a>
@@ -280,22 +280,22 @@ export default function Example() {
             <Popover.Panel
               focus
               static
-              className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
+              className="absolute inset-x-0 top-0 p-2 transition origin-top-right transform md:hidden"
             >
-              <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
-                <div className="pt-5 pb-6 px-5">
+              <div className="bg-white divide-y-2 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 divide-gray-50">
+                <div className="px-5 pt-5 pb-6">
                   <div className="flex items-center justify-between">
                     <div>
                       <img
-                        className="h-8 w-auto"
+                        className="w-auto h-8"
                         src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                         alt="Workflow"
                       />
                     </div>
                     <div className="-mr-2">
-                      <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                      <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                         <span className="sr-only">Close menu</span>
-                        <XIcon className="h-6 w-6" aria-hidden="true" />
+                        <XIcon className="w-6 h-6" aria-hidden="true" />
                       </Popover.Button>
                     </div>
                   </div>
@@ -305,10 +305,10 @@ export default function Example() {
                         <a
                           key={item.name}
                           href={item.href}
-                          className="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50"
+                          className="flex items-center p-3 -m-3 rounded-lg hover:bg-gray-50"
                         >
-                          <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white">
-                            <item.icon className="h-6 w-6" aria-hidden="true" />
+                          <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 text-white bg-indigo-500 rounded-md">
+                            <item.icon className="w-6 h-6" aria-hidden="true" />
                           </div>
                           <div className="ml-4 text-base font-medium text-gray-900">
                             {item.name}
@@ -318,7 +318,7 @@ export default function Example() {
                     </nav>
                   </div>
                 </div>
-                <div className="py-6 px-5">
+                <div className="px-5 py-6">
                   <div className="grid grid-cols-2 gap-4">
                     <a
                       href="#"
@@ -342,7 +342,7 @@ export default function Example() {
                     </a>
                     {resources.map((item) => (
                       <a
-                        key={resources.name}
+                        key={item.name}
                         href={item.href}
                         className="text-base font-medium text-gray-900 hover:text-gray-700"
                       >
@@ -353,11 +353,11 @@ export default function Example() {
                   <div className="mt-6">
                     <a
                       href="#"
-                      className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                      className="flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700"
                     >
                       Sign up
                     </a>
-                    <p className="mt-6 text-center text-base font-medium text-gray-500">
+                    <p className="mt-6 text-base font-medium text-center text-gray-500">
                       Existing customer?{" "}
                       <a href="#" className="text-indigo-600 hover:text-indigo-500">
                         Sign in
