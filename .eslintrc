@@ -22,7 +22,12 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "no-use-before-define": "off",
     "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/display-name": "off",
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/ban-types": "off"
   }
 }
