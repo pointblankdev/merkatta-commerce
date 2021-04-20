@@ -246,14 +246,14 @@ export default function LandingPage() {
                 >
                   <div className="flex items-center flex-1">
                     <div className="flex items-center justify-between w-full md:w-auto">
-                      <a href="#">
+                      {/* <a href="#">
                         <span className="sr-only">Workflow</span>
                         <img
                           className="w-auto h-8 sm:h-10"
                           src="https://tailwindui.com/img/logos/workflow-mark-teal-200-cyan-400.svg"
                           alt=""
                         />
-                      </a>
+                      </a> */}
                       <div className="flex items-center -mr-2 md:hidden">
                         <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-gray-900 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white">
                           <span className="sr-only">Open main menu</span>
@@ -677,14 +677,13 @@ export default function LandingPage() {
           <div className="max-w-md px-4 pt-12 mx-auto sm:max-w-7xl sm:px-6 lg:pt-16 lg:px-8">
             <div className="xl:grid xl:grid-cols-3 xl:gap-8">
               <div className="space-y-8 xl:col-span-1">
-                <img
+                {/* <img
                   className="h-10"
                   src="https://tailwindui.com/img/logos/workflow-mark-gray-300.svg"
                   alt="Company name"
-                />
+                /> */}
                 <p className="text-base text-gray-500">
-                  Making the world a better place through constructing elegant
-                  hierarchies.
+                  Your one stop shop for wholesale packaging
                 </p>
                 <div className="flex space-x-6">
                   {footerNavigation.social.map((item) => (
@@ -776,7 +775,7 @@ export default function LandingPage() {
             </div>
             <div className="py-8 mt-12 border-t border-gray-200">
               <p className="text-base text-gray-400 xl:text-center">
-                &copy; 2020 Workflow, Inc. All rights reserved.
+                &copy; 2021 Merkatta, Inc. All rights reserved.
               </p>
             </div>
           </div>
