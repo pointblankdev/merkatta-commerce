@@ -273,7 +273,7 @@ export default function LandingPage() {
                       ))}
                     </div>
                   </div>
-                  <div className="hidden md:flex md:items-center md:space-x-6">
+                  {/* <div className="hidden md:flex md:items-center md:space-x-6">
                     <a
                       href="#"
                       className="text-base font-medium text-white hover:text-gray-300"
@@ -286,7 +286,7 @@ export default function LandingPage() {
                     >
                       Start free trial
                     </a>
-                  </div>
+                  </div> */}
                 </nav>
               </div>
 
@@ -333,7 +333,7 @@ export default function LandingPage() {
                           </a>
                         ))}
                       </div>
-                      <div className="px-5 mt-6">
+                      {/* <div className="px-5 mt-6">
                         <a
                           href="#"
                           className="block w-full px-4 py-3 font-medium text-center text-white rounded-md shadow bg-gradient-to-r from-eastern-blue-500 to-cyan-600 hover:from-eastern-blue-600 hover:to-cyan-700"
@@ -348,7 +348,7 @@ export default function LandingPage() {
                             Login
                           </a>
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </Popover.Panel>
@@ -362,7 +362,7 @@ export default function LandingPage() {
               <div className="lg:grid lg:grid-cols-2 lg:gap-8">
                 <div className="max-w-md px-4 mx-auto sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
                   <div className="lg:py-24">
-                    <a
+                    {/* <a
                       href="#"
                       className="inline-flex items-center p-1 pr-2 text-white bg-black rounded-full sm:text-base lg:text-sm xl:text-base hover:text-gray-200"
                     >
@@ -374,19 +374,18 @@ export default function LandingPage() {
                         className="w-5 h-5 ml-2 text-gray-500"
                         aria-hidden="true"
                       />
-                    </a>
+                    </a> */}
                     <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
-                      <span className="block">A better way to</span>
+                      <span className="block">Welcome to Merkatta</span>
                       <span className="block text-transparent bg-clip-text bg-gradient-to-r from-eastern-blue-200 to-cyan-400">
-                        ship web apps
+                        You've found the best place to buy and sell wholesale packaging
+                        online.
                       </span>
                     </h1>
-                    <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                      Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-                      Lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-                      fugiat.
+                    <p className="mt-10 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                      Our full site will be launching soon!
                     </p>
-                    <div className="mt-10 sm:mt-12">
+                    {/* <div className="mt-10 sm:mt-12">
                       <form action="#" className="sm:max-w-xl sm:mx-auto lg:mx-0">
                         <div className="sm:flex">
                           <div className="flex-1 min-w-0">
@@ -418,7 +417,7 @@ export default function LandingPage() {
                           .
                         </p>
                       </form>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
@@ -436,7 +435,7 @@ export default function LandingPage() {
           </div>
 
           {/* Feature section with screenshot */}
-          <div className="relative pt-16 bg-gray-50 sm:pt-24 lg:pt-32">
+          {/* <div className="relative pt-16 bg-gray-50 sm:pt-24 lg:pt-32">
             <div className="max-w-md px-4 mx-auto text-center sm:px-6 sm:max-w-3xl lg:px-8 lg:max-w-7xl">
               <div>
                 <h2 className="text-base font-semibold tracking-wider uppercase text-cyan-600">
@@ -459,10 +458,10 @@ export default function LandingPage() {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Feature section with grid */}
-          <div className="relative py-16 bg-white sm:py-24 lg:py-32">
+          {/* <div className="relative py-16 bg-white sm:py-24 lg:py-32">
             <div className="max-w-md px-4 mx-auto text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
               <h2 className="text-base font-semibold tracking-wider uppercase text-cyan-600">
                 Deploy faster
@@ -502,20 +501,20 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Testimonial section */}
-          <div className="pb-16 bg-gradient-to-r from-eastern-blue-500 to-cyan-600 lg:pb-0 lg:z-10 lg:relative">
+          <div className="pb-16 bg-gradient-to-r bg-white lg:pb-0 lg:z-10 lg:relative">
             <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
               <div className="relative lg:-my-8">
-                <div
+                {/* <div
                   aria-hidden="true"
                   className="absolute inset-x-0 top-0 bg-white h-1/2 lg:hidden"
-                />
+                /> */}
                 <div className="max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:p-0 lg:h-full">
                   <div className="overflow-hidden shadow-xl aspect-w-10 aspect-h-6 rounded-xl sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
                     <img
-                      className="object-cover lg:h-full lg:w-full"
+                      className="object-cover mt-5 lg:mt-0 lg:h-full lg:w-full"
                       src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2102&q=80"
                       alt=""
                     />
@@ -527,23 +526,24 @@ export default function LandingPage() {
                   <blockquote>
                     <div>
                       <svg
-                        className="w-12 h-12 text-white opacity-25"
+                        className="w-12 h-12 text-eastern-blue-500  opacity-25"
                         fill="currentColor"
                         viewBox="0 0 32 32"
                         aria-hidden="true"
                       >
                         <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                       </svg>
-                      <p className="mt-6 text-2xl font-medium text-white">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed urna
-                        nulla vitae laoreet augue. Amet feugiat est integer dolor auctor
-                        adipiscing nunc urna, sit.
+                      <p className="mt-6 text-2xl font-medium text-eastern-blue-500">
+                        Stay tuned for something great, Merkatta will provide an
+                        unrivalled experience in wholesale packaging
                       </p>
                     </div>
                     <footer className="mt-6">
-                      <p className="text-base font-medium text-white">Judith Black</p>
-                      <p className="text-base font-medium text-cyan-100">
-                        CEO at PureInsights
+                      <p className="text-base font-medium text-eastern-blue-500">
+                        Tony King
+                      </p>
+                      <p className="text-base font-medium text-eastern-blue-500">
+                        CEO at Merkatta
                       </p>
                     </footer>
                   </blockquote>
@@ -553,7 +553,7 @@ export default function LandingPage() {
           </div>
 
           {/* Blog section */}
-          <div className="relative py-16 bg-gray-50 sm:py-24 lg:py-32">
+          {/* <div className="relative py-16 bg-gray-50 sm:py-24 lg:py-32">
             <div className="relative">
               <div className="max-w-md px-4 mx-auto text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
                 <h2 className="text-base font-semibold tracking-wider uppercase text-cyan-600">
@@ -623,7 +623,7 @@ export default function LandingPage() {
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* CTA Section */}
           <div className="relative bg-gray-900">
@@ -642,16 +642,15 @@ export default function LandingPage() {
             <div className="relative max-w-md px-4 py-12 mx-auto sm:max-w-7xl sm:px-6 sm:py-20 md:py-28 lg:px-8 lg:py-32">
               <div className="md:ml-auto md:w-1/2 md:pl-10">
                 <h2 className="text-base font-semibold tracking-wider text-gray-300 uppercase">
-                  Award winning support
+                  Excellent Support
                 </h2>
                 <p className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                   We’re here to help
                 </p>
                 <p className="mt-3 text-lg text-gray-300">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas
-                  tempus tellus etiam sed. Quam a scelerisque amet ullamcorper eu enim et
-                  fermentum, augue. Aliquet amet volutpat quisque ut interdum tincidunt
-                  duis.
+                  Our support team is readily available to support you with all of your
+                  needs, here at Merkatta we firmly believe in going the extra mile for
+                  our customers
                 </p>
                 <div className="mt-8">
                   <div className="inline-flex rounded-md shadow">
