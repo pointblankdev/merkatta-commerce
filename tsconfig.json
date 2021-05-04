@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "esnext",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    // "strict": true,
-    "noImplicitAny": false,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -15,15 +13,25 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "baseUrl": ".",
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
     "paths": {
-      "@lib/*": ["lib/*"],
-      "@assets/*": ["assets/*"],
-      "@config/*": ["config/*"],
-      "@components/*": ["components/*"],
-      "@utils/*": ["utils/*"]
-    },
-    "strict": false
+      "@components/*": ["lib/components/*"],
+      "@components": ["lib/components"],
+      "@sections/*": ["lib/sections/*"],
+      "@sections": ["lib/sections"],
+      "@services/*": ["lib/services/*"],
+      "@services": ["lib/services"],
+      "@public/*": ["public/*"],
+      "@public": ["public"],
+      "@styles/*": ["styles/*"],
+      "@styles": ["styles"],
+      "@i18n": ["./i18n"],
+      "@test/*": ["test/*"],
+      "@test": ["test"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.tsx"],
   "exclude": ["node_modules"]
 }
