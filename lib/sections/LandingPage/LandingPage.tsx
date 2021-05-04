@@ -376,9 +376,9 @@ export default function LandingPage() {
                       />
                     </a>
                     <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
-                      <span className="block">A better way to</span>
+                      <span className="block">Welcome to</span>
                       <span className="block text-transparent bg-clip-text bg-gradient-to-r from-eastern-blue-200 to-cyan-400">
-                        ship web apps
+                        Merkatta
                       </span>
                     </h1>
                     <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
